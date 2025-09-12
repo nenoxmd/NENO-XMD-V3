@@ -86,7 +86,7 @@ ${menu.fun || '│ (No commands found)'}
                     forwardingScore: 999,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '0943932269217268e+33@newsletter',
+                        newsletterJid: '120363401225837204@newsletter',
                         newsletterName: 'NENO XMD',
                         serverMessageId: 143
                     }
