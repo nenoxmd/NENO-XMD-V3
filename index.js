@@ -139,7 +139,7 @@ https://github.com/Nimeshkamihiran/neno-xmd-V3
 > © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ɴɪᴍᴇꜱʜᴋᴀ ᴍɪʜɪʀᴀɴ 😍🥳`;
     conn.sendMessage(conn.user.id, { image: { url: `https://files.catbox.moe/l0ixpu.jpg` }, caption: up })
 
-          const channelJid = "0943932269217268e+33@newsletter"
+          const channelJid = "120363401225837204@newsletter"
           try {
             await conn.newsletterFollow(channelJid)
             console.log(`Successfully followed channel: ${channelJid}`)
