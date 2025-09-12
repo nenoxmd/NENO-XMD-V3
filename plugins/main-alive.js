@@ -39,8 +39,8 @@ lite({
                 forwardingScore: 1000,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363402507750390@newsletter',
-                    newsletterName: 'Malvin Tech',
+                    newsletterJid: '0943932269217268e+33@newsletter',
+                    newsletterName: 'ɴᴇɴᴏ xᴍᴅ',
                     serverMessageId: 143
                 }
             }
