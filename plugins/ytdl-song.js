@@ -44,7 +44,7 @@ lite({
             `🔽 *Reply with your choice:*\n` +
             `> 1 *Audio Type* 🎵\n` +
             `> 2 *Document Type* 📁\n\n` +
-            `${config.FOOTER || "ʟɪᴛᴇ-xᴅ"}`;
+            `${config.FOOTER || "ɴᴇɴᴏ-xᴍᴅ"}`;
 
         const sentMsg = await conn.sendMessage(from, { image: { url: image }, caption: info }, { quoted: mek });
         const messageID = sentMsg.key.id;
