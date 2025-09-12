@@ -45,7 +45,7 @@ const generateMenu = () => `
 `;
 
 lite({
-    pattern: "menu",
+    pattern: "menu2",
     desc: "Show bot menu",
     category: "main",
     react: "🍀",
