@@ -1,61 +1,67 @@
-const fs = require('fs');
-const { lite } = require('../lite');
+const { lite } = require("../lite");
+const fs = require("fs");
+const path = require("path");
+
+// Folder to save downloaded status media
+const STATUS_DIR = path.join(__dirname, "..", "downloaded_status");
+if (!fs.existsSync(STATUS_DIR)) fs.mkdirSync(STATUS_DIR, { recursive: true });
+
+// Helper to download quoted media
+async function downloadQuotedMedia(quoted) {
+  try {
+    if (!quoted) return null;
+    if (typeof quoted.downloadMedia === "function") {
+      const media = await quoted.downloadMedia();
+      if (media && media.data) {
+        return { buffer: Buffer.from(media.data, "base64"), mimetype: media.mimetype || null };
+      }
+    }
+  } catch (e) {
+    console.error("Failed to download quoted media:", e);
+  }
+  return null;
+}
+
+// Get extension from mimetype
+function getExtension(mimetype) {
+  if (!mimetype) return "bin";
+  return mimetype.split("/")[1].split(";")[0] || "bin";
+}
 
 lite({
-    pattern: "status",
-    desc: "Download quoted image, video, audio, or text from WhatsApp status/message.",
-    react: "📥",
-    category: "main",
-    filename: __filename,
-    fromMe: false
-}, async (conn, mek, m, { from, body, reply }) => {
-    try {
-        if (!m.quoted || !mek || !mek.message || !body) return;
+  pattern: "status",
+  react: "🟢",
+  desc: "Download the replied media (status/photo/video) and send it",
+  category: "main",
+  filename: __filename
+}, async (conn, mek, m, { reply, quoted, from }) => {
+  try {
+    if (!quoted) return reply("❌ Please reply to a media message to download and send it.");
 
-        const data = JSON.stringify(mek.message, null, 2);
-        const jsonData = JSON.parse(data);
-        const isStatus = jsonData?.extendedTextMessage?.contextInfo?.remoteJid;
+    const result = await downloadQuotedMedia(quoted);
+    if (!result || !result.buffer) return reply("❌ Failed to download the media.");
 
-        if (!isStatus) return;
+    const buffer = result.buffer;
+    const mimetype = (result.mimetype || "").toString();
+    const ext = getExtension(mimetype);
+    const timestamp = Date.now();
+    const fileName = `status_${timestamp}.${ext}`;
+    const filePath = path.join(STATUS_DIR, fileName);
 
-        let bdy = body.toLowerCase();
-        const keywords = ["දියම්","දෙන්න","දාන්න","එවන්න","ඕන","ඕනා","එවපන්","දාපන්","එව්පන්","send","give","ewpn","ewapan","ewanna","danna","dpn","dapan","ona","daham","diym","dhm","save","status","ඕනි","ඕනී","ewm","ewnn"];
-        const kk = keywords.map(word => word.toLowerCase());
+    // Save locally
+    fs.writeFileSync(filePath, buffer);
 
-        if (!kk.includes(bdy)) return;
-
-        const caption = `> ɴᴇɴᴏ xᴍᴅ ᴘᴏᴡᴇʀꜰᴜʟʟ ᴡʜᴀᴛꜱᴘᴘ ʙᴏᴛ`;
-
-        if (m.quoted.type === 'imageMessage') {
-            const buff = await m.quoted.download();
-            await conn.sendMessage(from, {
-                image: buff,
-                caption
-            }, { quoted: mek });
-
-        } else if (m.quoted.type === 'videoMessage') {
-            const buff = await m.quoted.download();
-            await conn.sendMessage(from, {
-                video: buff,
-                mimetype: "video/mp4",
-                fileName: `${m.id}.mp4`,
-                caption
-            }, { quoted: mek });
-
-        } else if (m.quoted.type === 'audioMessage') {
-            const buff = await m.quoted.download();
-            await conn.sendMessage(from, {
-                audio: buff,
-                mimetype: "audio/mp3",
-                ptt: true
-            }, { quoted: mek });
-
-        } else if (m.quoted.type === 'extendedTextMessage') {
-            await conn.sendMessage(from, { text: m.quoted.msg.text }, { quoted: mek });
-        }
-
-    } catch (error) {
-        console.error("Status Downloader Error:", error);
-        reply("❌ Failed to download the quoted status. Please try again.");
+    // Send the media back to the chat
+    if (mimetype.startsWith("image/")) {
+      await conn.sendMessage(from, { image: buffer, caption: `✅ Downloaded status saved as ${fileName}` }, { quoted: mek });
+    } else if (mimetype.startsWith("video/")) {
+      await conn.sendMessage(from, { video: buffer, caption: `✅ Downloaded status saved as ${fileName}` }, { quoted: mek });
+    } else {
+      await conn.sendMessage(from, { document: buffer, fileName, mimetype: mimetype || "application/octet-stream", caption: `✅ Downloaded status saved as ${fileName}` }, { quoted: mek });
     }
+
+  } catch (err) {
+    console.error("Error in .status plugin:", err);
+    reply("❌ Failed to download or send the status media.");
+  }
 });
