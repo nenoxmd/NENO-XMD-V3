@@ -41,7 +41,7 @@ lite({
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
                 newsletterJid: "120363401225837204@newsletter",
-                newsletterName: "Malvin Tech",
+                newsletterName: "NENO XMD",
                 serverMessageId: 220
             }
         };
