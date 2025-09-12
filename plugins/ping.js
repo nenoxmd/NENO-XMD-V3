@@ -32,7 +32,7 @@ async (conn, mek, m, { from, quoted, sender, reply }) => {
         const end = new Date().getTime();
         const responseTime = (end - start) / 1000;
 
-        const text = `> *LITE RESPONSE: ${responseTime.toFixed(2)}m/s ${reactionEmoji}*`;
+        const text = `> *NENO RESPONSE: ${responseTime.toFixed(2)}m/s ${reactionEmoji}*`;
 
         await conn.sendMessage(from, {
             text,
@@ -41,8 +41,8 @@ async (conn, mek, m, { from, quoted, sender, reply }) => {
                 forwardingScore: 999,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363402507750390@newsletter',
-                    newsletterName: "ᴍᴀʟᴠɪɴ ᴋɪɴɢ ᴛᴇᴄʜ",
+                    newsletterJid: '0943932269217268e+33@newsletter',
+                    newsletterName: "NENO XMD",
                     serverMessageId: 143
                 }
             }
