@@ -2,42 +2,70 @@ const axios = require('axios');
 const { lite } = require('../lite');
 
 const CHANNEL_JID = '120363401225837204@newsletter';
-const CHANNEL_NAME = 'ᴍᴀʟᴠɪɴ ᴋɪɴɢ ᴛᴇᴄʜ';
+const CHANNEL_NAME = 'ɴᴇɴᴏ xᴍᴅ';
 
-const animeGirlCommand = ['animegirl', 'animegirl1', 'animegirl2', 'animegirl3', 'animegirl4', 'animegirl5'];
+lite({
+    pattern: "animegirl",
+    desc: "Fetch a random anime girl image.",
+    category: "anime",
+    react: "👧",
+    filename: __filename
+}, async (conn, mek, m, { from, reply }) => {
+    try {
+        const apiUrl = `https://api.waifu.pics/sfw/waifu`;
+        const response = await axios.get(apiUrl);
+        const data = response.data;
 
-animeGirlCommand.forEach(cmdName => {
-    lite({
-        pattern: cmdName,
-        desc: "Fetch a random anime girl image.",
-        category: "anime",
-        react: "👧",
-        filename: __filename
-    }, async (conn, mek, m, { from, reply }) => {
-        try {
-            const apiUrl = `https://api.waifu.pics/sfw/waifu`;
-            const response = await axios.get(apiUrl);
-            const data = response.data;
-
-            const captionText = '👸 *NENO XMD RANDOM ANIME GIRL IMAGES* 👸\n\n\n *🧬©NENO BY NIMESHKA*';
-
-            await conn.sendMessage(from, {
-                image: { url: data.url },
-                caption: captionText,
-                contextInfo: {
-                    forwardingScore: 999,
-                    isForwarded: true,
-                    forwardedNewsletterMessageInfo: {
-                        newsletterJid: CHANNEL_JID,
-                        newsletterName: CHANNEL_NAME,
-                        serverMessageId: 101
-                    }
+        await conn.sendMessage(from, {
+            image: { url: data.url },
+            caption: '👸 *NENO XMD RANDOM ANIME GIRL IMAGES* 👸\n\n\n *🧬©NENO BY NIMESHKA*',
+            contextInfo: {
+                forwardingScore: 999,
+                isForwarded: true,
+                forwardedNewsletterMessageInfo: {
+                    newsletterJid: CHANNEL_JID,
+                    newsletterName: CHANNEL_NAME,
+                    serverMessageId: 101
                 }
-            });
+            }
+        }, { quoted: mek });
 
-        } catch (e) {
-            console.error(`Error fetching anime girl image for ${cmdName}:`, e);
-            reply(`❌ Error fetching anime girl image: ${e.message}`);
-        }
-    });
+    } catch (e) {
+        console.error(e);
+        reply(`❌ Error fetching anime girl image: ${e.message}`);
+    }
 });
+
+lite({
+    pattern: "animegirl1",
+    desc: "Fetch a random anime girl image.",
+    category: "anime",
+    react: "👧",
+    filename: __filename
+}, async (conn, mek, m, { from, reply }) => {
+    try {
+        const apiUrl = `https://api.waifu.pics/sfw/waifu`;
+        const response = await axios.get(apiUrl);
+        const data = response.data;
+
+        await conn.sendMessage(from, {
+            image: { url: data.url },
+            caption: '👸 *NENO XMD RANDOM ANIME GIRL IMAGES* 👸\n\n\n *🧬©NENO BY NIMESHKA*',
+            contextInfo: {
+                forwardingScore: 999,
+                isForwarded: true,
+                forwardedNewsletterMessageInfo: {
+                    newsletterJid: CHANNEL_JID,
+                    newsletterName: CHANNEL_NAME,
+                    serverMessageId: 102
+                }
+            }
+        }, { quoted: mek });
+
+    } catch (e) {
+        console.error(e);
+        reply(`❌ Error fetching anime girl image: ${e.message}`);
+    }
+});
+
+// ඔයාගේ original code එකේ අනෙක් commands (animegirl2, animegirl3, animegirl4, animegirl5) ඒම pattern එකෙන් copy කරලා replace කරන්න පුළුවන්
