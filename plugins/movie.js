@@ -1,68 +1,64 @@
 const axios = require('axios');
 const { lite } = require('../lite');
 
+// OMDB API Key
+const OMDB_API_KEY = "76cb7f39"; // Replace with your own if needed
+
 lite({
     pattern: "movie",
-    react: "🎬",
     desc: "Fetch detailed information about a movie.",
     category: "utility",
+    react: "🎬",
     filename: __filename
-}, async (conn, mek, m, { args, reply, sender }) => {
+}, async (conn, mek, m, { args, reply, from }) => {
     try {
         const movieName = args.join(' ');
-        if (!movieName) return reply("❌ Please provide the name of the movie. Example: .movie Inception");
+        if (!movieName) {
+            return reply("📽️ Please provide the name of the movie.\nExample: .movie Inception");
+        }
 
-        // API Key added directly here
-        const OMDB_API_KEY = "76cb7f39"; 
         const apiUrl = `http://www.omdbapi.com/?t=${encodeURIComponent(movieName)}&apikey=${OMDB_API_KEY}`;
         const response = await axios.get(apiUrl);
         const data = response.data;
 
-        if (data.Response === "False") return reply("❌ Movie not found.");
+        if (data.Response === "False") {
+            return reply("❌ Movie not found.");
+        }
 
         const movieInfo = `
-🎞️ *Movie Details* 🎞️
+*🎬 𝗡𝗘𝗡𝗢 𝗫𝗠𝗗 🎬*
 
-📌 *Title:* ${data.Title}
-📅 *Year:* ${data.Year}
-⭐ *Rated:* ${data.Rated}
-📆 *Released:* ${data.Released}
-⏱️ *Runtime:* ${data.Runtime}
-🎭 *Genre:* ${data.Genre}
-🎬 *Director:* ${data.Director}
-✍️ *Writer:* ${data.Writer}
-👨‍🎤 *Actors:* ${data.Actors}
-🗣️ *Language:* ${data.Language}
-🌍 *Country:* ${data.Country}
-🏆 *Awards:* ${data.Awards}
-🎖️ *IMDb Rating:* ${data.imdbRating}
+*ᴛɪᴛʟᴇ:* ${data.Title}
+*ʏᴇᴀʀ:* ${data.Year}
+*ʀᴀᴛᴇᴅ:* ${data.Rated}
+*ʀᴇʟᴇᴀꜱᴇᴅ:* ${data.Released}
+*ʀᴜɴᴛɪᴍᴇ:* ${data.Runtime}
+*ɢᴇɴʀᴇ:* ${data.Genre}
+*ᴅɪʀᴇᴄᴛᴏʀ:* ${data.Director}
+*ᴡʀɪᴛᴇʀ:* ${data.Writer}
+*ᴀᴄᴛᴏʀꜱ:* ${data.Actors}
+*ʟᴀɴɢᴜᴀɢᴇ:* ${data.Language}
+*ᴄᴏᴜɴᴛʀʏ:* ${data.Country}
+*ᴀᴡᴀʀᴅꜱ:* ${data.Awards}
+*ɪᴍᴅʙ ʀᴀᴛɪɴɢ:* ${data.imdbRating}
 
 > POWERED BY NIMESHKA MIHIRAN
 `;
 
-        const imageUrl = data.Poster && data.Poster !== 'N/A' ? data.Poster : "https://i.ibb.co/album-placeholder.png";
+        // Safe check for poster
+        const imageUrl = data.Poster && data.Poster !== 'N/A' ? data.Poster : null;
 
-        await conn.sendMessage(
-            m.from,
-            {
+        if (imageUrl) {
+            await conn.sendMessage(from, {
                 image: { url: imageUrl },
-                caption: movieInfo,
-                contextInfo: {
-                    mentionedJid: [sender],
-                    forwardingScore: 999,
-                    isForwarded: true,
-                    forwardedNewsletterMessageInfo: {
-                        newsletterJid: "120363402507750390@newsletter",
-                        newsletterName: "NENO XMD",
-                        serverMessageId: 143
-                    }
-                }
-            },
-            { quoted: mek }
-        );
+                caption: movieInfo
+            });
+        } else {
+            await reply(movieInfo);
+        }
 
     } catch (e) {
-        console.error(e);
-        reply(`❌ Error: ${e.message}`);
+        console.error('Movie command error:', e);
+        reply(`❌ Error: ${e.message || e}`);
     }
 });
