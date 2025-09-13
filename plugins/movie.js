@@ -53,7 +53,7 @@ lite({
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
                         newsletterJid: "120363402507750390@newsletter",
-                        newsletterName: "ᴍᴀʟᴠɪɴ ᴋɪɴɢ ᴛᴇᴄʜ",
+                        newsletterName: "NENO XMD",
                         serverMessageId: 143
                     }
                 }
