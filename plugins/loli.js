@@ -5,7 +5,7 @@ lite({
     pattern: "loli",
     alias: ["lolii"],
     desc: "Fetch a random anime girl image.",
-    category: "fun",
+    category: "anime",
     react: "🐱",
     filename: __filename,
     fromMe: false
