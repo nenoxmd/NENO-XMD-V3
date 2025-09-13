@@ -51,31 +51,3 @@ lite({
     const apiUrl = `https://api.siputzx.my.id/api/ai/flux?prompt=${encodeURIComponent(q)}`;
     await generateImage(apiUrl, q, malvin, mek, from, reply);
 });
-
-// Stable Diffusion
-lite({
-    pattern: "stablediffusion",
-    alias: ["sdiffusion", "imagine2"],
-    react: "🚀",
-    desc: "Generate an image using Stable Diffusion.",
-    category: "main",
-    filename: __filename,
-    fromMe: false
-}, async (malvin, mek, m, { from, q, reply }) => {
-    const apiUrl = `https://api.siputzx.my.id/api/ai/stable-diffusion?prompt=${encodeURIComponent(q)}`;
-    await generateImage(apiUrl, q, malvin, mek, from, reply);
-});
-
-// StabilityAI
-lite({
-    pattern: "stabilityai",
-    alias: ["stability", "imagine3"],
-    react: "🚀",
-    desc: "Generate an image using StabilityAI.",
-    category: "main",
-    filename: __filename,
-    fromMe: false
-}, async (malvin, mek, m, { from, q, reply }) => {
-    const apiUrl = `https://api.siputzx.my.id/api/ai/stabilityai?prompt=${encodeURIComponent(q)}`;
-    await generateImage(apiUrl, q, malvin, mek, from, reply);
-});
