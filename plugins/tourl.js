@@ -10,7 +10,7 @@ lite({
   alias: ["imgtourl", "imgurl", "url", "geturl", "upload"],
   react: "🖇",
   desc: "Convert media to Catbox URL",
-  category: "utility",
+  category: "other",
   use: ".tourl [reply to media]",
   filename: __filename,
 }, async (conn, mek, m, { reply }) => {
