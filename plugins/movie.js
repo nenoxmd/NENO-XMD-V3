@@ -1,78 +1,59 @@
-// plugins/movie.js
-const axios = require("axios");
-const { lite } = require("../lite");
+const axios = require('axios');
+const { lite } = require('../lite');
 
 lite({
     pattern: "movie",
+    react: "🎬",
     desc: "Fetch detailed information about a movie.",
     category: "utility",
-    react: "🎬",
     filename: __filename
-},
-async (conn, mek, m, { from, reply, sender, args }) => {
+}, async (conn, mek, m, { args, reply, sender }) => {
     try {
-        // Extract movie name
-        const movieName = args.length > 0 
-            ? args.join(" ") 
-            : m.text.replace(/^[\.\#\$\!]?movie\s?/i, "").trim();
-        
-        if (!movieName) {
-            return reply("📽️ Please provide the name of the movie.\nExample: .movie Iron Man");
-        }
+        const movieName = args.join(' ');
+        if (!movieName) return reply("❌ Please provide the name of the movie. Example: .movie Inception");
 
-        // API call
-        const apiUrl = `https://apis.davidcyriltech.my.id/imdb?query=${encodeURIComponent(movieName)}`;
+        // API Key added directly here
+        const OMDB_API_KEY = "76cb7f39"; 
+        const apiUrl = `http://www.omdbapi.com/?t=${encodeURIComponent(movieName)}&apikey=${OMDB_API_KEY}`;
         const response = await axios.get(apiUrl);
+        const data = response.data;
 
-        if (!response.data.status || !response.data.movie) {
-            return reply("🚫 Movie not found. Please check the name and try again.");
-        }
+        if (data.Response === "False") return reply("❌ Movie not found.");
 
-        const movie = response.data.movie;
+        const movieInfo = `
+🎞️ *Movie Details* 🎞️
 
-        // Caption format
-        const dec = `
-🎬 *${movie.title}* (${movie.year}) ${movie.rated || ''}
+📌 *Title:* ${data.Title}
+📅 *Year:* ${data.Year}
+⭐ *Rated:* ${data.Rated}
+📆 *Released:* ${data.Released}
+⏱️ *Runtime:* ${data.Runtime}
+🎭 *Genre:* ${data.Genre}
+🎬 *Director:* ${data.Director}
+✍️ *Writer:* ${data.Writer}
+👨‍🎤 *Actors:* ${data.Actors}
+🗣️ *Language:* ${data.Language}
+🌍 *Country:* ${data.Country}
+🏆 *Awards:* ${data.Awards}
+🎖️ *IMDb Rating:* ${data.imdbRating}
 
-⭐ *IMDb:* ${movie.imdbRating || 'N/A'} 
-🍅 *Rotten Tomatoes:* ${movie.ratings.find(r => r.source === 'Rotten Tomatoes')?.value || 'N/A'} 
-💰 *Box Office:* ${movie.boxoffice || 'N/A'}
+> POWERED BY NIMESHKA MIHIRAN
+`;
 
-📅 *Released:* ${new Date(movie.released).toLocaleDateString()}
-⏳ *Runtime:* ${movie.runtime}
-🎭 *Genre:* ${movie.genres}
+        const imageUrl = data.Poster && data.Poster !== 'N/A' ? data.Poster : "https://i.ibb.co/album-placeholder.png";
 
-📝 *Plot:* ${movie.plot}
-
-🎥 *Director:* ${movie.director}
-✍️ *Writer:* ${movie.writer}
-🌟 *Actors:* ${movie.actors}
-
-🌍 *Country:* ${movie.country}
-🗣️ *Language:* ${movie.languages}
-🏆 *Awards:* ${movie.awards || 'None'}
-
-🔗 [View on IMDb](${movie.imdbUrl})
-
-> *ᴋᴇᴇᴘ ʀᴏᴄᴋɪɴ' ɴᴇɴᴏ xᴍᴅ*`;
-
-        // Send movie info
         await conn.sendMessage(
-            from,
+            m.from,
             {
-                image: { 
-                    url: movie.poster && movie.poster !== "N/A" 
-                        ? movie.poster 
-                        : "https://files.catbox.moe/kmrq7z.jpg"
-                },
-                caption: dec,
+                image: { url: imageUrl },
+                caption: movieInfo,
                 contextInfo: {
                     mentionedJid: [sender],
                     forwardingScore: 999,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: "120363301882959206@newsletter",
-                        newsletterName: "NENO XMD",
+                        newsletterJid: "120363402507750390@newsletter",
+                        newsletterName: "ᴍᴀʟᴠɪɴ ᴋɪɴɢ ᴛᴇᴄʜ",
                         serverMessageId: 143
                     }
                 }
@@ -81,7 +62,7 @@ async (conn, mek, m, { from, reply, sender, args }) => {
         );
 
     } catch (e) {
-        console.error("Movie command error:", e);
+        console.error(e);
         reply(`❌ Error: ${e.message}`);
     }
 });
