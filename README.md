@@ -1,4 +1,4 @@
-# NENO XMD BOT (V2)
+# NENO XMD BOT (V3) [NEW UPDATE]
 <p align="center">
 <a href="https://github.com/Nimeshkamihiran"><img title="Author" src="https://files.catbox.moe/ukjr05.jpg"></a>
 
