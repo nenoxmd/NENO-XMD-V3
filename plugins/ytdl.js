@@ -1,37 +1,20 @@
 // plugins/video_song_choice.js
-const config = require('../settings');
 const { lite } = require('../lite');
-const DY_SCRAP = require('@dark-yasiya/scrap');
-const dy_scrap = new DY_SCRAP();
+const config = require('../settings');
+const ytdl = require('ytdl-core');
+const fs = require('fs');
+const path = require('path');
+const os = require('os');
 
-// YouTube ID extract function
-function replaceYouTubeID(url) {
-  const regex = /(?:youtube\.com\/(?:.*v=|.*\/)|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/;
-  const match = url.match(regex);
-  return match ? match[1] : null;
+function formatBytes(bytes) {
+  if (bytes === 0) return '0 Bytes';
+  const k = 1024;
+  const dm = 2;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
-// Robust download URL extractor
-function extractDownloadUrl(resp) {
-  if (!resp) return null;
-
-  // mp3 style
-  if (resp?.result?.download?.url) return resp.result.download.url;
-  if (resp?.result?.download_url) return resp.result.download_url;
-  if (resp?.result?.url) return resp.result.url;
-
-  // mp4 style
-  if (resp?.result?.video?.url) return resp.result.video.url;
-  if (resp?.result?.downloads?.length) return resp.result.downloads[0]?.url;
-
-  // fallback
-  if (resp?.download?.url) return resp.download.url;
-  if (resp?.url) return resp.url;
-
-  return null;
-}
-
-// Main plugin
 lite({
   pattern: "video",
   alias: ["vid", "ytv", "song"],
@@ -43,31 +26,27 @@ lite({
   fromMe: false
 }, async (conn, m, mek, { from, q, reply }) => {
   try {
-    if (!q) return await reply("❌ Please provide a YouTube URL or search query!");
+    if (!q) return await reply("❌ Please provide a YouTube URL!");
 
-    // Get video ID
-    let id = q.startsWith("http") ? replaceYouTubeID(q) : null;
-    if (!id) {
-      const search = await dy_scrap.ytsearch(q);
-      if (!search?.results?.length) return await reply("❌ No results found!");
-      id = search.results[0].videoId;
-    }
+    if (!ytdl.validateURL(q)) return await reply("❌ Invalid YouTube URL!");
 
-    // Fetch video info
-    const data = await dy_scrap.ytsearch(`https://youtube.com/watch?v=${id}`);
-    if (!data?.results?.length) return await reply("❌ Failed to fetch video info!");
+    const info = await ytdl.getInfo(q);
+    const title = info.videoDetails.title;
+    const thumbnail = info.videoDetails.thumbnails[info.videoDetails.thumbnails.length - 1].url;
+    const duration = new Date(info.videoDetails.lengthSeconds * 1000).toISOString().substr(11, 8);
+    const views = info.videoDetails.viewCount;
+    const author = info.videoDetails.author.name;
+    const uploaded = info.videoDetails.uploadDate;
 
-    const { url, title, image, timestamp, ago, views, author } = data.results[0];
-
-    const info = [
+    const infoMsg = [
       `🍄 *VIDEO DOWNLOADER* 🍄`,
       ``,
-      `🎬 *Title:* ${title || "Unknown"}`,
-      `⏳ *Duration:* ${timestamp || "Unknown"}`,
-      `👀 *Views:* ${views || "Unknown"}`,
-      `🌏 *Uploaded:* ${ago || "Unknown"}`,
-      `👤 *Author:* ${author?.name || "Unknown"}`,
-      `🔗 *Url:* ${url || "Unknown"}`,
+      `🎬 *Title:* ${title}`,
+      `⏳ *Duration:* ${duration}`,
+      `👀 *Views:* ${views}`,
+      `🌏 *Uploaded:* ${uploaded}`,
+      `👤 *Author:* ${author}`,
+      `🔗 *Url:* ${q}`,
       ``,
       `🔽 *Reply with your choice:*`,
       `> 1 — Audio (mp3) 🎵`,
@@ -76,12 +55,10 @@ lite({
       `${config.FOOTER || "ɴᴇɴᴏ-xᴍᴅ"}`
     ].join("\n");
 
-    const sent = await conn.sendMessage(from, { image: { url: image }, caption: info }, { quoted: mek });
+    const sent = await conn.sendMessage(from, { image: { url: thumbnail }, caption: infoMsg }, { quoted: mek });
     const messageID = sent.key.id;
-    await conn.sendMessage(from, { react: { text: '🎶', key: sent.key } }).catch(()=>{});
-
-    // One-time listener
     const originalSender = m.sender;
+
     let timeoutHandle;
 
     const handler = async (update) => {
@@ -99,27 +76,43 @@ lite({
         const text = upMsg.message.conversation || upMsg.message.extendedTextMessage?.text || "";
         const choice = text.trim();
 
-        // Remove listener & timeout
         conn.ev.off('messages.upsert', handler);
         clearTimeout(timeoutHandle);
 
+        // Temp file paths
+        const tmpDir = os.tmpdir();
+        const baseName = title.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+        const audioPath = path.join(tmpDir, `${baseName}.mp3`);
+        const videoPath = path.join(tmpDir, `${baseName}.mp4`);
+
         if (choice === "1") {
-          const processing = await conn.sendMessage(from, { text: "⏳ Processing audio (mp3)..." }, { quoted: mek });
-          const resp = await dy_scrap.ytmp3(`https://youtube.com/watch?v=${id}`);
-          const downloadUrl = extractDownloadUrl(resp);
-          if (!downloadUrl) return await reply("❌ Audio download link not found!");
-          await conn.sendMessage(from, { audio: { url: downloadUrl }, mimetype: "audio/mpeg" }, { quoted: mek });
-          await conn.sendMessage(from, { text: '✅ Audio sent.', edit: processing.key }).catch(()=>{});
+          await conn.sendMessage(from, { text: "⏳ Processing audio (mp3)..." }, { quoted: mek });
+          const stream = ytdl(q, { filter: 'audioonly', quality: 'highestaudio' });
+          const writeStream = fs.createWriteStream(audioPath);
+          stream.pipe(writeStream);
+
+          writeStream.on('finish', async () => {
+            const stats = fs.statSync(audioPath);
+            await conn.sendMessage(from, { audio: { url: audioPath }, mimetype: 'audio/mpeg', fileName: `${title}.mp3` }, { quoted: mek });
+            await conn.sendMessage(from, { text: `✅ Audio sent (${formatBytes(stats.size)})` }, { quoted: mek });
+            fs.unlinkSync(audioPath);
+          });
         } else if (choice === "2") {
-          const processing = await conn.sendMessage(from, { text: "⏳ Processing video (mp4)..." }, { quoted: mek });
-          const resp = await dy_scrap.ytmp4(`https://youtube.com/watch?v=${id}`);
-          const downloadUrl = extractDownloadUrl(resp);
-          if (!downloadUrl) return await reply("❌ Video download link not found!");
-          await conn.sendMessage(from, { video: { url: downloadUrl }, mimetype: "video/mp4", caption: title }, { quoted: mek });
-          await conn.sendMessage(from, { text: '✅ Video sent.', edit: processing.key }).catch(()=>{});
+          await conn.sendMessage(from, { text: "⏳ Processing video (mp4)..." }, { quoted: mek });
+          const stream = ytdl(q, { quality: 'highestvideo' });
+          const writeStream = fs.createWriteStream(videoPath);
+          stream.pipe(writeStream);
+
+          writeStream.on('finish', async () => {
+            const stats = fs.statSync(videoPath);
+            await conn.sendMessage(from, { video: { url: videoPath }, mimetype: 'video/mp4', caption: title, fileName: `${title}.mp4` }, { quoted: mek });
+            await conn.sendMessage(from, { text: `✅ Video sent (${formatBytes(stats.size)})` }, { quoted: mek });
+            fs.unlinkSync(videoPath);
+          });
         } else {
           await reply("❌ Invalid choice. Reply with *1* for mp3 or *2* for mp4.");
         }
+
       } catch (err) {
         console.error("Listener error:", err);
         try { await reply(`❌ Processing error: ${err.message || err}`); } catch(_) {}
@@ -139,7 +132,6 @@ lite({
 
   } catch (error) {
     console.error("Video command error:", error);
-    try { await conn.sendMessage(from, { react: { text: '❌', key: mek.key } }); } catch(_) {}
     await reply(`❌ An error occurred: ${error?.message || error}`);
   }
 });
