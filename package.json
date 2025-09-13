@@ -1,4 +1,4 @@
-
+"
 
 {
   "name": "Neno-xmd",
@@ -56,6 +56,7 @@
     "@mrnima/facebook-downloader":"1.0.0",
     "mrnima-moviedl":"1.0.0",
     "dotenv":"^16.3.1",
-    "@dark-yasiya/news-scrap": "^1.0.0"
+    "@dark-yasiya/news-scrap":"^1.0.0",
+    "@dark-yasiya/scrap":"1.0.1" 
   }
 }
