@@ -50,7 +50,7 @@ module.exports = {
     PUBLIC_MODE: convertToBool(process.env.PUBLIC_MODE),
     AUTO_TYPING: convertToBool(process.env.AUTO_TYPING),
     READ_CMD: convertToBool(process.env.READ_CMD),
-    DEV: process.env.DEV,
+    DEV: process.env.DEV || "94721584279",
     ANTI_VV: convertToBool(process.env.ANTI_VV),
     ANTI_DEL_PATH: process.env.ANTI_DEL_PATH,
     AUTO_RECORDING: convertToBool(process.env.AUTO_RECORDING),
