@@ -4,23 +4,34 @@ const { lite } = require('../lite');
 const DY_SCRAP = require('@dark-yasiya/scrap');
 const dy_scrap = new DY_SCRAP();
 
+// YouTube ID extract function
 function replaceYouTubeID(url) {
   const regex = /(?:youtube\.com\/(?:.*v=|.*\/)|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/;
   const match = url.match(regex);
   return match ? match[1] : null;
 }
 
+// Robust download URL extractor
 function extractDownloadUrl(resp) {
-  // try common shapes used by scrapers
   if (!resp) return null;
-  return resp?.result?.download?.url ||
-         resp?.result?.download_url ||
-         resp?.result?.url ||
-         resp?.download?.url ||
-         resp?.url ||
-         null;
+
+  // mp3 style
+  if (resp?.result?.download?.url) return resp.result.download.url;
+  if (resp?.result?.download_url) return resp.result.download_url;
+  if (resp?.result?.url) return resp.result.url;
+
+  // mp4 style
+  if (resp?.result?.video?.url) return resp.result.video.url;
+  if (resp?.result?.downloads?.length) return resp.result.downloads[0]?.url;
+
+  // fallback
+  if (resp?.download?.url) return resp.download.url;
+  if (resp?.url) return resp.url;
+
+  return null;
 }
 
+// Main plugin
 lite({
   pattern: "video",
   alias: ["vid", "ytv", "song"],
@@ -34,7 +45,7 @@ lite({
   try {
     if (!q) return await reply("❌ Please provide a YouTube URL or search query!");
 
-    // find video id
+    // Get video ID
     let id = q.startsWith("http") ? replaceYouTubeID(q) : null;
     if (!id) {
       const search = await dy_scrap.ytsearch(q);
@@ -42,7 +53,7 @@ lite({
       id = search.results[0].videoId;
     }
 
-    // fetch video info
+    // Fetch video info
     const data = await dy_scrap.ytsearch(`https://youtube.com/watch?v=${id}`);
     if (!data?.results?.length) return await reply("❌ Failed to fetch video info!");
 
@@ -69,8 +80,8 @@ lite({
     const messageID = sent.key.id;
     await conn.sendMessage(from, { react: { text: '🎶', key: sent.key } }).catch(()=>{});
 
-    // prepare limited, single-use listener
-    const originalSender = m.sender; // the user who requested
+    // One-time listener
+    const originalSender = m.sender;
     let timeoutHandle;
 
     const handler = async (update) => {
@@ -78,25 +89,20 @@ lite({
         const upMsg = update?.messages?.[0];
         if (!upMsg || !upMsg.message) return;
 
-        // identify who sent the incoming message
         const incomingSender = upMsg.key.participant || upMsg.key.remoteJid;
-        if (!incomingSender) return;
-        if (incomingSender !== originalSender) return; // only accept same user
+        if (!incomingSender || incomingSender !== originalSender) return;
 
-        // ensure it's a reply to our info message
         const context = upMsg.message.extendedTextMessage?.contextInfo;
         const isReply = context && context.stanzaId === messageID;
         if (!isReply) return;
 
-        // get text content (conversation or extended text)
         const text = upMsg.message.conversation || upMsg.message.extendedTextMessage?.text || "";
         const choice = text.trim();
 
-        // remove listener & timeout immediately (one-time)
+        // Remove listener & timeout
         conn.ev.off('messages.upsert', handler);
         clearTimeout(timeoutHandle);
 
-        // handle choices
         if (choice === "1") {
           const processing = await conn.sendMessage(from, { text: "⏳ Processing audio (mp3)..." }, { quoted: mek });
           const resp = await dy_scrap.ytmp3(`https://youtube.com/watch?v=${id}`);
@@ -122,10 +128,8 @@ lite({
       }
     };
 
-    // register listener
     conn.ev.on('messages.upsert', handler);
 
-    // auto-remove listener after 60s
     timeoutHandle = setTimeout(async () => {
       try {
         conn.ev.off('messages.upsert', handler);
