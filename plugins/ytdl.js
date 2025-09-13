@@ -2,9 +2,7 @@
 const { lite } = require('../lite');
 const config = require('../settings');
 const ytdl = require('ytdl-core');
-const fs = require('fs');
-const path = require('path');
-const os = require('os');
+const { PassThrough } = require('stream');
 
 function formatBytes(bytes) {
   if (bytes === 0) return '0 Bytes';
@@ -15,23 +13,34 @@ function formatBytes(bytes) {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
+// Convert shorts URL to normal watch URL
+function convertShortsToWatch(url) {
+  if (url.includes("youtube.com/shorts/")) {
+    const id = url.split("/shorts/")[1].split("?")[0];
+    return `https://youtube.com/watch?v=${id}`;
+  }
+  return url;
+}
+
 lite({
   pattern: "video",
   alias: ["vid", "ytv", "song"],
   react: "🎬",
   desc: "Show YT info then let user choose 1=mp3 or 2=mp4",
   category: "download",
-  use: ".video <YT URL or Query>",
+  use: ".video <YT URL>",
   filename: __filename,
   fromMe: false
 }, async (conn, m, mek, { from, q, reply }) => {
   try {
     if (!q) return await reply("❌ Please provide a YouTube URL!");
 
-    if (!ytdl.validateURL(q)) return await reply("❌ Invalid YouTube URL!");
+    const videoUrl = convertShortsToWatch(q);
 
-    const info = await ytdl.getInfo(q);
-    const title = info.videoDetails.title;
+    if (!ytdl.validateURL(videoUrl)) return await reply("❌ Invalid YouTube URL!");
+
+    const info = await ytdl.getInfo(videoUrl);
+    const title = info.videoDetails.title || "Unknown";
     const thumbnail = info.videoDetails.thumbnails[info.videoDetails.thumbnails.length - 1].url;
     const duration = new Date(info.videoDetails.lengthSeconds * 1000).toISOString().substr(11, 8);
     const views = info.videoDetails.viewCount;
@@ -44,9 +53,9 @@ lite({
       `🎬 *Title:* ${title}`,
       `⏳ *Duration:* ${duration}`,
       `👀 *Views:* ${views}`,
-      `🌏 *Uploaded:* ${uploaded}`,
       `👤 *Author:* ${author}`,
-      `🔗 *Url:* ${q}`,
+      `🌏 *Uploaded:* ${uploaded}`,
+      `🔗 *Url:* ${videoUrl}`,
       ``,
       `🔽 *Reply with your choice:*`,
       `> 1 — Audio (mp3) 🎵`,
@@ -79,36 +88,33 @@ lite({
         conn.ev.off('messages.upsert', handler);
         clearTimeout(timeoutHandle);
 
-        // Temp file paths
-        const tmpDir = os.tmpdir();
-        const baseName = title.replace(/[^a-z0-9]/gi, '_').toLowerCase();
-        const audioPath = path.join(tmpDir, `${baseName}.mp3`);
-        const videoPath = path.join(tmpDir, `${baseName}.mp4`);
-
         if (choice === "1") {
           await conn.sendMessage(from, { text: "⏳ Processing audio (mp3)..." }, { quoted: mek });
-          const stream = ytdl(q, { filter: 'audioonly', quality: 'highestaudio' });
-          const writeStream = fs.createWriteStream(audioPath);
-          stream.pipe(writeStream);
+          const stream = ytdl(videoUrl, { filter: 'audioonly', quality: 'highestaudio' });
+          const pass = new PassThrough();
+          stream.pipe(pass);
 
-          writeStream.on('finish', async () => {
-            const stats = fs.statSync(audioPath);
-            await conn.sendMessage(from, { audio: { url: audioPath }, mimetype: 'audio/mpeg', fileName: `${title}.mp3` }, { quoted: mek });
-            await conn.sendMessage(from, { text: `✅ Audio sent (${formatBytes(stats.size)})` }, { quoted: mek });
-            fs.unlinkSync(audioPath);
-          });
+          await conn.sendMessage(from, {
+            audio: pass,
+            mimetype: 'audio/mpeg',
+            fileName: `${title}.mp3`
+          }, { quoted: mek });
+
+          await conn.sendMessage(from, { text: "✅ Audio sent." }, { quoted: mek });
         } else if (choice === "2") {
           await conn.sendMessage(from, { text: "⏳ Processing video (mp4)..." }, { quoted: mek });
-          const stream = ytdl(q, { quality: 'highestvideo' });
-          const writeStream = fs.createWriteStream(videoPath);
-          stream.pipe(writeStream);
+          const stream = ytdl(videoUrl, { quality: 'highestvideo' });
+          const pass = new PassThrough();
+          stream.pipe(pass);
 
-          writeStream.on('finish', async () => {
-            const stats = fs.statSync(videoPath);
-            await conn.sendMessage(from, { video: { url: videoPath }, mimetype: 'video/mp4', caption: title, fileName: `${title}.mp4` }, { quoted: mek });
-            await conn.sendMessage(from, { text: `✅ Video sent (${formatBytes(stats.size)})` }, { quoted: mek });
-            fs.unlinkSync(videoPath);
-          });
+          await conn.sendMessage(from, {
+            video: pass,
+            mimetype: 'video/mp4',
+            caption: title,
+            fileName: `${title}.mp4`
+          }, { quoted: mek });
+
+          await conn.sendMessage(from, { text: "✅ Video sent." }, { quoted: mek });
         } else {
           await reply("❌ Invalid choice. Reply with *1* for mp3 or *2* for mp4.");
         }
