@@ -1,5 +1,5 @@
 const config = require('../settings');
-const { lite } = require('../neno');
+const { lite } = require('../lite');   // use lite ✅
 const DY_SCRAP = require('@dark-yasiya/scrap');
 const dy_scrap = new DY_SCRAP();
 
@@ -13,9 +13,9 @@ lite({
     pattern: "video",
     alias: ["vid","ytv"],
     react: "🎬",
-    desc: "Download YT mp3/mp4 with choice",
+    desc: "Download YouTube as mp3/mp4",
     category: "download",
-    use: ".video <YT URL or Text>",
+    use: ".video <YT URL or Query>",
     filename: __filename
 }, async (conn, m, mek, { from, q, reply }) => {
     try {
@@ -42,15 +42,15 @@ lite({
             `👤 *Author:* ${author?.name || "Unknown"}\n` +
             `🖇 *Url:* ${url || "Unknown"}\n\n` +
             `🔽 *Reply with your choice:*\n` +
-            `> 1 *Audio Type (mp3)* 🎵\n` +
-            `> 2 *Video Type (mp4)* 🎬\n\n` +
+            `> 1 *Audio (mp3)* 🎵\n` +
+            `> 2 *Video (mp4)* 🎬\n\n` +
             `${config.FOOTER || "ɴᴇɴᴏ-xᴍᴅ"}`;
 
         const sentMsg = await conn.sendMessage(from, { image: { url: image }, caption: info }, { quoted: mek });
         const messageID = sentMsg.key.id;
         await conn.sendMessage(from, { react: { text: '🎶', key: sentMsg.key } });
 
-        // Listen for user reply
+        // Listen for reply
         conn.ev.on('messages.upsert', async (messageUpdate) => {
             try {
                 const mekInfo = messageUpdate?.messages[0];
