@@ -1,3 +1,4 @@
+// plugins/group_commands.js
 const { lite } = require("../lite");
 
 // 🔑 Check if sender can use command (bot number or admin)
@@ -8,7 +9,7 @@ function canUseCommand(m, malvin, isAdmins) {
 }
 
 // 🛑 BLOCK
-cmd({
+lite({
     pattern: "block",
     react: "🚫",
     alias: ["banuser"],
@@ -30,7 +31,7 @@ cmd({
 });
 
 // 👢 KICK
-cmd({
+lite({
     pattern: "kick",
     react: "👢",
     alias: ["remove"],
@@ -54,7 +55,7 @@ cmd({
 });
 
 // 🧹 KICK ALL
-cmd({
+lite({
     pattern: "kickall",
     react: "🧹",
     desc: "Remove all non-admin members.",
@@ -81,7 +82,7 @@ cmd({
 });
 
 // 📢 TAG ALL
-cmd({
+lite({
     pattern: "tagall",
     react: "📢",
     desc: "Mention all members.",
@@ -109,7 +110,7 @@ cmd({
 });
 
 // 🔇 MUTE
-cmd({
+lite({
     pattern: "mute",
     react: "🔇",
     alias: ["silence", "lock"],
@@ -131,7 +132,7 @@ cmd({
 });
 
 // 🔊 UNMUTE
-cmd({
+lite({
     pattern: "unmute",
     react: "🔊",
     alias: ["unlock"],
@@ -153,7 +154,7 @@ cmd({
 });
 
 // 🚪 LEAVE
-cmd({
+lite({
     pattern: "left",
     react: "🚪",
     alias: ["leave", "exit"],
@@ -174,7 +175,7 @@ cmd({
 });
 
 // ⬆️ PROMOTE
-cmd({
+lite({
     pattern: "promote",
     react: "⬆️",
     desc: "Promote a user to admin.",
@@ -197,7 +198,7 @@ cmd({
 });
 
 // ⬇️ DEMOTE
-cmd({
+lite({
     pattern: "demote",
     react: "⬇️",
     desc: "Demote an admin to member.",
