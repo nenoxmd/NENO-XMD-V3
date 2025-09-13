@@ -1,44 +1,101 @@
-const { lite } = require('../lite');
+const config = require('../settings');
+const { lite } = require('../neno');
+const DY_SCRAP = require('@dark-yasiya/scrap');
+const dy_scrap = new DY_SCRAP();
+
+function replaceYouTubeID(url) {
+    const regex = /(?:youtube\.com\/(?:.*v=|.*\/)|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+}
 
 lite({
-    pattern: "hack",
-    desc: "The ultimate playful hacking simulation! 😎",
-    category: "fun",
-    react: "🧨",
+    pattern: "video",
+    alias: ["vid","ytv"],
+    react: "🎬",
+    desc: "Download YT mp3/mp4 with choice",
+    category: "download",
+    use: ".video <YT URL or Text>",
     filename: __filename
-}, async (conn, mek, m, { from, reply, participants }) => {
+}, async (conn, m, mek, { from, q, reply }) => {
     try {
-        const users = participants.map(u => u.id.split('@')[0]);
-        const targets = ['Instagram', 'Facebook', 'WhatsApp', 'Bank Servers', 'Email', 'Secret Vault'];
-        const files = ['Passwords', 'DMs', 'Photos', 'Bank Info', 'Private Notes', 'Cookies', 'NFTs', 'Crypto Keys'];
+        if (!q) return await reply("❌ Please provide a query or YouTube URL!");
 
-        const victim = users[Math.floor(Math.random() * users.length)] || 'Anonymous';
+        let id = q.startsWith("https://") ? replaceYouTubeID(q) : null;
 
-        const steps = [
-            `💻 *ULTRA HACK INITIATED* 💻`,
-            `🎯 Targeting: ${victim} on ${targets[Math.floor(Math.random() * targets.length)]}`,
-            '*Injecting malware...* 💉',
-            '*Bypassing firewalls...* 🛡️',
-            '*Downloading secret files...* 📂',
-            `🔑 Stolen Data: ${files[Math.floor(Math.random() * files.length)]}`,
-            '```[███░░░░░░░░░░░] 25%``` ⏳',
-            '```[████████░░░░░░] 50%``` ⏳',
-            '```[█████████████] 75%``` ⏳',
-            '```[████████████████] 100%``` ✅',
-            '*Encrypting traces...* 🔒',
-            '*Uploading to dark web...* 🌑',
-            `💥 *HACK COMPLETE!* ${victim}'s secrets are now yours... (just for fun!)`,
-            '⚠️ *Disclaimer:* All actions are playful and for demonstration only. Ethical hacking rules! ⚠️'
-        ];
-
-        for (const line of steps) {
-            // Typing presence for hype
-            await conn.sendPresenceUpdate('composing', from);
-            await conn.sendMessage(from, { text: line }, { quoted: mek });
-            await new Promise(r => setTimeout(r, 1200 + Math.random() * 800)); // random delay 1.2-2s
+        if (!id) {
+            const searchResults = await dy_scrap.ytsearch(q);
+            if (!searchResults?.results?.length) return await reply("❌ No results found!");
+            id = searchResults.results[0].videoId;
         }
 
-    } catch (e) {
-        reply(`❌ *Error!* ${e.message}`);
+        const data = await dy_scrap.ytsearch(`https://youtube.com/watch?v=${id}`);
+        if (!data?.results?.length) return await reply("❌ Failed to fetch video!");
+
+        const { url, title, image, timestamp, ago, views, author } = data.results[0];
+
+        let info = `🍄 *𝚅𝙸𝙳𝙴𝙾 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳𝙴𝚁* 🍄\n\n` +
+            `🎬 *Title:* ${title || "Unknown"}\n` +
+            `⏳ *Duration:* ${timestamp || "Unknown"}\n` +
+            `👀 *Views:* ${views || "Unknown"}\n` +
+            `🌏 *Release Ago:* ${ago || "Unknown"}\n` +
+            `👤 *Author:* ${author?.name || "Unknown"}\n` +
+            `🖇 *Url:* ${url || "Unknown"}\n\n` +
+            `🔽 *Reply with your choice:*\n` +
+            `> 1 *Audio Type (mp3)* 🎵\n` +
+            `> 2 *Video Type (mp4)* 🎬\n\n` +
+            `${config.FOOTER || "ɴᴇɴᴏ-xᴍᴅ"}`;
+
+        const sentMsg = await conn.sendMessage(from, { image: { url: image }, caption: info }, { quoted: mek });
+        const messageID = sentMsg.key.id;
+        await conn.sendMessage(from, { react: { text: '🎶', key: sentMsg.key } });
+
+        // Listen for user reply
+        conn.ev.on('messages.upsert', async (messageUpdate) => {
+            try {
+                const mekInfo = messageUpdate?.messages[0];
+                if (!mekInfo?.message) return;
+
+                const messageType = mekInfo?.message?.conversation || mekInfo?.message?.extendedTextMessage?.text;
+                const isReplyToSentMsg = mekInfo?.message?.extendedTextMessage?.contextInfo?.stanzaId === messageID;
+
+                if (!isReplyToSentMsg) return;
+
+                let userReply = messageType.trim();
+                let msg;
+                let type;
+                let response;
+
+                if (userReply === "1") {
+                    msg = await conn.sendMessage(from, { text: "⏳ Processing audio..." }, { quoted: mek });
+                    response = await dy_scrap.ytmp3(`https://youtube.com/watch?v=${id}`);
+                    let downloadUrl = response?.result?.download?.url;
+                    if (!downloadUrl) return await reply("❌ Audio download link not found!");
+                    type = { audio: { url: downloadUrl }, mimetype: "audio/mpeg" };
+
+                } else if (userReply === "2") {
+                    msg = await conn.sendMessage(from, { text: "⏳ Processing video..." }, { quoted: mek });
+                    response = await dy_scrap.ytmp4(`https://youtube.com/watch?v=${id}`);
+                    let downloadUrl = response?.result?.download?.url;
+                    if (!downloadUrl) return await reply("❌ Video download link not found!");
+                    type = { video: { url: downloadUrl }, mimetype: "video/mp4", caption: title };
+
+                } else {
+                    return await reply("❌ Invalid choice! Reply with 1 or 2.");
+                }
+
+                await conn.sendMessage(from, type, { quoted: mek });
+                await conn.sendMessage(from, { text: '✅ Media Upload Successful ✅', edit: msg.key });
+
+            } catch (error) {
+                console.error(error);
+                await reply(`❌ *Error while processing:* ${error.message || "Error!"}`);
+            }
+        });
+
+    } catch (error) {
+        console.error(error);
+        await conn.sendMessage(from, { react: { text: '❌', key: mek.key } });
+        await reply(`❌ *An error occurred:* ${error.message || "Error!"}`);
     }
 });
