@@ -14,16 +14,15 @@ module.exports = {
     LINK_WARN_LIMIT: Number(process.env.LINK_WARN_LIMIT),
     LINK_ACTION: process.env.LINK_ACTION,
     AUTO_STATUS_SEEN: convertToBool(process.env.AUTO_STATUS_SEEN),
-    AUTO_STATUS_MSG: process.env.AUTO_STATUS_MSG || "*SEEN YOUR STATUS BY NENO.XMD 💖😍*",
+    AUTO_STATUS_REPLY: convertToBool(process.env.AUTO_STATUS_REPLY),
     AUTO_STATUS_REACT: convertToBool(process.env.AUTO_STATUS_REACT),
-    AUTO_STATUS_MSG: process.env.AUTO_STATUS_MSG,
+    AUTO_STATUS_MSG: process.env.AUTO_STATUS_MSG || "*SEEN YOUR STATUS BY NENO.XMD 💖😍*",
     WELCOME: convertToBool(process.env.WELCOME),
     ADMIN_EVENTS: convertToBool(process.env.ADMIN_EVENTS),
     ANTI_LINK: convertToBool(process.env.ANTI_LINK),
     MENTION_REPLY: convertToBool(process.env.MENTION_REPLY),
     MENU_IMAGE_URL: process.env.MENU_IMAGE_URL || "https://files.catbox.moe/n8g2o7.jpg",
     ALIVE_IMG: process.env.ALIVE_IMG || "https://files.catbox.moe/pf7ytb.jpg",
-    // add img for alive msg
     LIVE_MSG: process.env.LIVE_MSG || 
 `> ʙᴏᴛ ɪs sᴘᴀʀᴋɪɴɢ ᴀᴄᴛɪᴠᴇ ᴀɴᴅ ᴀʟɪᴠᴇ
 
@@ -32,10 +31,9 @@ module.exports = {
 *© ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ -ɴᴇɴᴏ xᴍᴅ*
 
 > ɢɪᴛʜᴜʙ : https://github.com/Nimeshkamihiran`,
-    // add alive msg here 
     STICKER_NAME: process.env.STICKER_NAME,
     CUSTOM_REACT: convertToBool(process.env.CUSTOM_REACT),
-    CUSTOM_REACT_EMOJIS: process.env.CUSTOM_REACT_EMOJIS.split(','),
+    CUSTOM_REACT_EMOJIS: process.env.CUSTOM_REACT_EMOJIS ? process.env.CUSTOM_REACT_EMOJIS.split(',') : [],
     DELETE_LINKS: convertToBool(process.env.DELETE_LINKS),
     OWNER_NUMBER: process.env.OWNER_NUMBER || "94721584279",
     OWNER_NAME: process.env.OWNER_NAME || "ɴɪᴍᴇꜱʜᴋᴀ࿐",
@@ -50,43 +48,11 @@ module.exports = {
     PUBLIC_MODE: convertToBool(process.env.PUBLIC_MODE),
     AUTO_TYPING: convertToBool(process.env.AUTO_TYPING),
     READ_CMD: convertToBool(process.env.READ_CMD),
-    DEV: process.env.DEV || "94721584279",
+    DEV: "94721584279", // Fixed number, not from .env
     ANTI_VV: convertToBool(process.env.ANTI_VV),
     ANTI_DEL_PATH: process.env.ANTI_DEL_PATH,
     AUTO_RECORDING: convertToBool(process.env.AUTO_RECORDING),
     version: process.env.version || "0.0.5",
-    START_MSG: process.env.START_MSG || 
-`*Hᴇʟʟᴏ ᴀʟʟ ɪᴀᴍ ɴᴇɴᴏ xᴍᴅ ᴡʜᴀᴛꜱᴘᴘ ʙᴏᴛ ᴄᴏɴɴᴇᴄᴛᴇᴅ! 👋🏻* 
-
-*💖ᴋᴇᴇᴘ ᴏɴ ɴɪᴄᴇ ᴛᴏ ᴍᴇᴇᴛ ʏᴏᴜ💫☺️* 
-
-> sᴜʙsᴄʀɪʙᴇ ʏᴛ ᴄʜᴀɴɴᴇʟ ғᴏʀ ᴛᴜᴛᴏʀɪᴀʟs
-https://youtube.com/@MihirangaMihiranga-k1k
-
-- *ʏᴏᴜʀ ʙᴏᴛ ᴘʀᴇғɪx: ➡️[ . ]*
-> - ʏᴏᴜ ᴄᴀɴ ᴄʜᴀɴɢᴇ ᴜʀ ᴘʀᴇғɪx ᴜsɪɴɢ ᴛʜᴇ .ᴘʀᴇғɪx ᴄᴏᴍᴍᴀɴᴅ
-
-> ᴅᴏɴᴛ ғᴏʀɢᴇᴛ ᴛᴏ sʜᴀʀᴇ, sᴛᴀʀ & ғᴏʀᴋ ᴛʜᴇ ʀᴇᴘᴏ ⬇️ 
-https://github.com/Nimeshkamihiran/neno-xmd-V3
-
-> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ɴɪᴍᴇꜱʜᴋᴀ ᴍɪʜɪʀᴀɴ💖😍`
-};    READ_CMD: process.env.READ_CMD || "false",
-    // true if want mark commands as read  
-
-    DEV: process.env.DEV || "263780166288",
-    // replace with your whatsapp number  
-
-    ANTI_VV: process.env.ANTI_VV || "true",
-    // true for anti once view 
-
-    ANTI_DEL_PATH: process.env.ANTI_DEL_PATH || "inbox",
-    // change it to 'inbox' or 'same' if you want to resend deleted message in same chat 
-
-    AUTO_RECORDING: process.env.AUTO_RECORDING || "false",
-    // make it true for auto recording 
-
-    version: process.env.version || "0.0.5",
-
     START_MSG: process.env.START_MSG || 
 `*Hᴇʟʟᴏ ᴀʟʟ ɪᴀᴍ ɴᴇɴᴏ xᴍᴅ ᴡʜᴀᴛꜱᴘᴘ ʙᴏᴛ ᴄᴏɴɴᴇᴄᴛᴇᴅ! 👋🏻* 
 
