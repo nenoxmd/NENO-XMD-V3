@@ -143,5 +143,11 @@ https://youtube.com/@MihirangaMihiranga-k1k
 > ᴅᴏɴᴛ ғᴏʀɢᴇᴛ ᴛᴏ sʜᴀʀᴇ, sᴛᴀʀ & ғᴏʀᴋ ᴛʜᴇ ʀᴇᴘᴏ ⬇️ 
 https://github.com/Nimeshkamihiran/neno-xmd-V3
 
-> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ɴɪᴍᴇꜱʜᴋᴀ ᴍɪʜɪʀᴀɴ💖😍`
+> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ɴɪᴍᴇꜱʜᴋᴀ ᴍɪʜɪʀᴀɴ💖😍`,
+OWNER_DISPLAY: process.env.OWNER_DISPLAY || "Nimeshka Mihiran",
+    
+DOWNLOAD_DIR: process.env.DOWNLOAD_DIR || "./downloaded_status",
+
+  // Timezone
+TIMEZONE: process.env.TIMEZONE || "Asia/Colombo"
 };
