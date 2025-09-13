@@ -1,131 +1,92 @@
-// plugins/video_savenow_ytsearch.js
-const { lite } = require('../lite');
+// plugins/ytvideo.js
+const { lite } = require("../lite");
 const yts = require("yt-search");
 const axios = require("axios");
-const config = require('../settings');
-
-const apiKey = "edffd0d607404679c3e2f65071049817ddeb7988";
-const apiDomain = "https://p.savenow.to";
-
-function extractDownloadUrl(resp) {
-    if (!resp) return null;
-    return resp?.result?.download?.url || resp?.result?.download_url || resp?.result?.url || resp?.download?.url || resp?.url || null;
-}
 
 lite({
     pattern: "video",
-    alias: ["vid", "ytv", "song"],
-    react: "🎬",
-    desc: "Search YouTube and download audio/video",
+    react: "🎥",
+    desc: "Download YouTube Video",
     category: "download",
-    use: ".video <YT URL or Query>",
-    filename: __filename,
-    fromMe: false
-}, async (conn, m, mek, { from, q, reply, sender }) => {
+    filename: __filename
+}, async (conn, mek, m, { from, args, reply }) => {
     try {
-        if (!q) return await reply("❌ Please provide a YouTube URL or search query!");
+        const q = args.join(" ");
+        if (!q) return reply("*Provide a name or a YouTube link.* 🎥❤️");
 
-        let url;
-        if (q.startsWith("http")) {
-            url = q;
-        } else {
-            const search = await yts(q);
-            if (!search.videos.length) return await reply("❌ No results found!");
-            url = search.videos[0].url;
+        // 1) Find the URL
+        let url = q;
+        try {
+            url = new URL(q).toString();
+        } catch {
+            const s = await yts(q);
+            if (!s.videos.length) return reply("❌ No videos found!");
+            url = s.videos[0].url;
         }
 
-        // Fetch video info from API
-        const infoResp = await axios.get(`${apiDomain}/ajax/info.php`, {
-            params: { url, api: apiKey }
-        });
+        // 2) Send metadata + thumbnail
+        const info = (await yts(url)).videos[0];
+        const desc = `
+🧩 *𝗡𝗘𝗡𝗢 𝗫𝗠𝗗 DOWNLOADER* 🧩
+📌 *Title:* ${info.title}
 
-        if (!infoResp.data || !infoResp.data.result) return await reply("❌ Failed to fetch video info!");
+📝 *Description:* ${info.description}
 
-        const { title, image, timestamp, views, author, url: videoUrl } = infoResp.data.result;
+⏱️ *Uploaded:* ${info.timestamp} (${info.ago} ago)
 
-        const caption = [
-            `🍄 *VIDEO DOWNLOADER* 🍄`,
-            ``,
-            `🎬 *Title:* ${title || "Unknown"}`,
-            `⏳ *Duration:* ${timestamp || "Unknown"}`,
-            `👀 *Views:* ${views || "Unknown"}`,
-            `👤 *Author:* ${author?.name || "Unknown"}`,
-            `🔗 *Url:* ${videoUrl || "Unknown"}`,
-            ``,
-            `🔽 *Reply with your choice:*`,
-            `> 1 — Audio (mp3) 🎵`,
-            `> 2 — Video (mp4) 🎬`,
-            ``,
-            `${config.FOOTER || "ɴᴇɴᴏ-xᴍᴅ"}`
-        ].join("\n");
+👀 *Views:* ${info.views}
 
-        const sent = await conn.sendMessage(from, { image: { url: image }, caption }, { quoted: mek });
-        const messageID = sent.key.id;
-        await conn.sendMessage(from, { react: { text: '🎶', key: sent.key } }).catch(()=>{});
+🔗 *Download URL:*
+${info.url}
 
-        const originalSender = sender;
-        let timeoutHandle;
+━━━━━━━━━━━━━━━━━━
+*ᴺᴵᴹᴱˢᴴᴷᴬ ᴹᴵᴴᴵᴿᴬᴺ🪀*
+        `.trim();
 
-        const handler = async (update) => {
-            try {
-                const upMsg = update?.messages?.[0];
-                if (!upMsg || !upMsg.message) return;
+        await conn.sendMessage(
+            from,
+            { image: { url: info.thumbnail }, caption: desc },
+            { quoted: mek }
+        );
 
-                const incomingSender = upMsg.key.participant || upMsg.key.remoteJid;
-                if (incomingSender !== originalSender) return;
+        // 3) Video download helper
+        const downloadVideo = async (videoUrl, quality = "720") => {
+            const apiUrl = `https://p.savenow.to/ajax/download.php?format=${quality}&url=${encodeURIComponent(
+                videoUrl
+            )}&api=edffd0d607404679c3e2f65071049817ddeb7988`; // << API Key here
 
-                const context = upMsg.message.extendedTextMessage?.contextInfo;
-                const isReply = context && context.stanzaId === messageID;
-                if (!isReply) return;
+            const res = await axios.get(apiUrl);
+            if (!res.data.success) throw new Error("Failed to fetch video details.");
 
-                const text = upMsg.message.conversation || upMsg.message.extendedTextMessage?.text || "";
-                const choice = text.trim();
+            const { id, title } = res.data;
+            const progressUrl = `https://p.savenow.to/ajax/progress.php?id=${id}`;
 
-                conn.ev.off('messages.upsert', handler);
-                clearTimeout(timeoutHandle);
-
-                if (choice === "1") {
-                    const processing = await conn.sendMessage(from, { text: "⏳ Processing audio (mp3)..." }, { quoted: mek });
-                    const resp = await axios.get(`${apiDomain}/ajax/ytmp3.php`, {
-                        params: { url: videoUrl, api: apiKey }
-                    });
-                    const downloadUrl = extractDownloadUrl(resp.data);
-                    if (!downloadUrl) return await reply("❌ Audio download link not found!");
-                    await conn.sendMessage(from, { audio: { url: downloadUrl }, mimetype: "audio/mpeg" }, { quoted: mek });
-                    await conn.sendMessage(from, { text: '✅ Audio sent.', edit: processing.key }).catch(()=>{});
-                } else if (choice === "2") {
-                    const processing = await conn.sendMessage(from, { text: "⏳ Processing video (mp4)..." }, { quoted: mek });
-                    const resp = await axios.get(`${apiDomain}/ajax/ytmp4.php`, {
-                        params: { url: videoUrl, api: apiKey }
-                    });
-                    const downloadUrl = extractDownloadUrl(resp.data);
-                    if (!downloadUrl) return await reply("❌ Video download link not found!");
-                    await conn.sendMessage(from, { video: { url: downloadUrl }, mimetype: "video/mp4", caption: title }, { quoted: mek });
-                    await conn.sendMessage(from, { text: '✅ Video sent.', edit: processing.key }).catch(()=>{});
-                } else {
-                    await reply("❌ Invalid choice. Reply with *1* for mp3 or *2* for mp4.");
+            // poll until ready
+            while (true) {
+                const prog = (await axios.get(progressUrl)).data;
+                if (prog.success && prog.progress === 1000) {
+                    const vid = await axios.get(prog.download_url, { responseType: "arraybuffer" });
+                    return { buffer: vid.data, title };
                 }
-
-            } catch (err) {
-                console.error("Listener error:", err);
-                try { await reply(`❌ Processing error: ${err.message || err}`); } catch(_) {}
-                conn.ev.off('messages.upsert', handler);
-                clearTimeout(timeoutHandle);
+                await new Promise((r) => setTimeout(r, 5000));
             }
         };
 
-        conn.ev.on('messages.upsert', handler);
+        // 4) Download + send
+        const { buffer, title } = await downloadVideo(url, "720");
+        await conn.sendMessage(
+            from,
+            {
+                video: buffer,
+                mimetype: "video/mp4",
+                caption: `🎥 *${title}*\n\nⒸ ALL RIGHTS RESERVED 𝗡𝗘𝗡𝗢 𝗫𝗠𝗗❤️`,
+            },
+            { quoted: mek }
+        );
 
-        timeoutHandle = setTimeout(async () => {
-            try {
-                conn.ev.off('messages.upsert', handler);
-                await conn.sendMessage(from, { text: '⏳ Timeout — no reply received. Please run the command again if you still want the file.' }, { quoted: mek });
-            } catch (_) {}
-        }, 60000);
-
-    } catch (error) {
-        console.error("Video command error:", error);
-        try { await conn.sendMessage(from, { react: { text: '❌', key: mek.key } }); } catch(_) {}
-        await reply(`❌ An error occurred: ${error?.message || error}`);
+        reply("*Thanks for using my bot!* 🎥");
+    } catch (e) {
+        console.error("Video Plugin Error:", e);
+        reply(`❌ Error: ${e.message}`);
     }
 });
