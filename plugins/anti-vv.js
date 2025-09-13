@@ -3,7 +3,7 @@ const { lite } = require("../neno");
 lite({
   pattern: "vv",
   alias: ["viewonce", 'retrive'],
-  react: '😏',
+  react: '🌏',
   desc: "Owner Only - retrieve quoted message back to user",
   category: "owner",
   filename: __filename
@@ -23,17 +23,7 @@ lite({
 
     const buffer = await match.quoted.download();
     const mtype = match.quoted.mtype;
-
-    // add newsletter forwarding context
-    const contextInfo = {
-      forwardingScore: 999,
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: "120363401225837204@newsletter",
-        newsletterName: "NENO XMD",
-        serverMessageId: 220 // can be any number if not used
-      }
-    };
+    const options = { quoted: message };
 
     let messageContent = {};
     switch (mtype) {
@@ -41,24 +31,21 @@ lite({
         messageContent = {
           image: buffer,
           caption: match.quoted.text || '',
-          mimetype: match.quoted.mimetype || "image/jpeg",
-          contextInfo
+          mimetype: match.quoted.mimetype || "image/jpeg"
         };
         break;
       case "videoMessage":
         messageContent = {
           video: buffer,
           caption: match.quoted.text || '',
-          mimetype: match.quoted.mimetype || "video/mp4",
-          contextInfo
+          mimetype: match.quoted.mimetype || "video/mp4"
         };
         break;
       case "audioMessage":
         messageContent = {
           audio: buffer,
           mimetype: "audio/mp4",
-          ptt: match.quoted.ptt || false,
-          contextInfo
+          ptt: match.quoted.ptt || false
         };
         break;
       default:
@@ -67,7 +54,7 @@ lite({
         }, { quoted: message });
     }
 
-    await client.sendMessage(from, messageContent, { quoted: message });
+    await client.sendMessage(from, messageContent, options);
   } catch (error) {
     console.error("vv Error:", error);
     await client.sendMessage(from, {
