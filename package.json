@@ -58,6 +58,6 @@
     "dotenv":"^16.3.1",
     "@dark-yasiya/news-scrap":"^1.0.0",
     "@dark-yasiya/scrap":"1.0.1",
-    "yt-dlp-exec":"1.0.2" 
+    "wa-sticker-formatter":"4.4.4" 
   }
 }
