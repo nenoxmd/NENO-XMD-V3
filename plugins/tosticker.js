@@ -7,7 +7,7 @@ lite({
   alias: ['s'],
   react: '🔖',
   desc: 'Reply to an image/video to convert to sticker',
-  category: 'utility',
+  category: 'other',
   filename: __filename
 }, async (conn, mek, m, { reply, quoted, from }) => {
   try {
@@ -63,7 +63,7 @@ lite({
   alias: ['toimg'],
   react: '🖼️',
   desc: 'Reply to a sticker to convert to image',
-  category: 'utility',
+  category: 'other',
   filename: __filename
 }, async (conn, mek, m, { reply, quoted, from }) => {
   try {
