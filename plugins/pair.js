@@ -21,7 +21,7 @@ async (conn, mek, m, { q, reply }) => {
         }
 
         // Fetch pairing code from API
-        const response = await fetch(`https://inconnu-boy-tech-web.onrender.com/pair/code?number=${q}`);
+        const response = await fetch(`https://neno-pair-k47s.onrender.com//code?number=${q}`);
         const pair = await response.json();
 
         if (!pair || !pair.code) {
