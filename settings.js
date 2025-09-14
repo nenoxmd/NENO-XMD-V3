@@ -1,1 +1,153 @@
-function _0x177c(_0x25dca8,_0x45cf8c){const _0x4be8bb=_0x4be8();return _0x177c=function(_0x177c1a,_0x4c2ea){_0x177c1a=_0x177c1a-0x1cd;let _0x385892=_0x4be8bb[_0x177c1a];return _0x385892;},_0x177c(_0x25dca8,_0x45cf8c);}const _0x1cb4d0=_0x177c;(function(_0xc3d474,_0x3e315a){const _0x4ba442=_0x177c,_0x4afc00=_0xc3d474();while(!![]){try{const _0x32f179=parseInt(_0x4ba442(0x202))/0x1*(parseInt(_0x4ba442(0x1ec))/0x2)+-parseInt(_0x4ba442(0x1e4))/0x3+parseInt(_0x4ba442(0x1d2))/0x4*(-parseInt(_0x4ba442(0x1ee))/0x5)+parseInt(_0x4ba442(0x207))/0x6+parseInt(_0x4ba442(0x1f0))/0x7+-parseInt(_0x4ba442(0x205))/0x8*(-parseInt(_0x4ba442(0x1fe))/0x9)+parseInt(_0x4ba442(0x1f4))/0xa*(-parseInt(_0x4ba442(0x1ea))/0xb);if(_0x32f179===_0x3e315a)break;else _0x4afc00['push'](_0x4afc00['shift']());}catch(_0x5d2169){_0x4afc00['push'](_0x4afc00['shift']());}}}(_0x4be8,0xf188e));const fs=require('fs');if(fs['existsSync'](_0x1cb4d0(0x203)))require(_0x1cb4d0(0x1e6))['config']({'path':_0x1cb4d0(0x1f6)});function convertToBool(_0x54d7f3,_0x4e6dbf=_0x1cb4d0(0x1d4)){return _0x54d7f3===_0x4e6dbf?!![]:![];}function _0x4be8(){const _0x184149=['STICKER_NAME','WELCOME','CUSTOM_REACT','AUTO_STICKER','DEV','youtube.com,github.com','OWNER_NAME','public','ANTI_LINK_KICK','PREFIX','SESSION_ID','env','https://files.catbox.moe/n8g2o7.jpg','ɴᴇɴᴏ\x20ᴠ3','1368372HTVUeV','DESCRIPTION','dotenv','*©\x20ᴘᴏᴡᴇʀᴇᴅ\x20ʙʏ\x20ɴɪᴍᴇꜱʜᴋᴀ\x20ᴍɪʜɪʀᴀᴍ*','AUTO_RECORDING','https://files.catbox.moe/pf7ytb.jpg','22awPERE','ɴɪᴍᴇꜱʜᴋᴀ࿐','58tHLreC','ALWAYS_ONLINE','25825AMqgDL','MENTION_REPLY','11262769uoRPso','AUTO_STATUS_SEEN','ADMIN_EVENTS','AUTO_TYPING','12914530edmEde','💝,💖,💗,❤️‍🩹,❤️,💛,💚,💙,💜,🤎,🖤,🤍','./config.env','ANTI_LINK','*Hᴇʟʟᴏ\x20ᴀʟʟ\x20ɪᴀᴍ\x20ɴᴇɴᴏ\x20xᴍᴅ\x20ᴡʜᴀᴛꜱᴘᴘ\x20ʙᴏᴛ\x20ᴄᴏɴɴᴇᴄᴛᴇᴅ!\x20👋🏻*\x20\x0a\x0a*💖ᴋᴇᴇᴘ\x20ᴏɴ\x20ɴɪᴄᴇ\x20ᴛᴏ\x20ᴍᴇᴇᴛ\x20ʏᴏᴜ💫☺️*\x20\x0a\x0a>\x20sᴜʙsᴄʀɪʙᴇ\x20ʏᴛ\x20ᴄʜᴀɴɴᴇʟ\x20ғᴏʀ\x20ᴛᴜᴛᴏʀɪᴀʟs\x0ahttps://youtube.com/@MihirangaMihiranga-k1k\x0a\x0a-\x20*ʏᴏᴜʀ\x20ʙᴏᴛ\x20ᴘʀᴇғɪx:\x20➡️[\x20.\x20]*\x0a>\x20-\x20ʏᴏᴜ\x20ᴄᴀɴ\x20ᴄʜᴀɴɢᴇ\x20ᴜʀ\x20ᴘʀᴇғɪx\x20ᴜsɪɴɢ\x20ᴛʜᴇ\x20.ᴘʀᴇғɪx\x20ᴄᴏᴍᴍᴀɴᴅ\x0a\x0a>\x20ᴅᴏɴᴛ\x20ғᴏʀɢᴇᴛ\x20ᴛᴏ\x20sʜᴀʀᴇ,\x20sᴛᴀʀ\x20&\x20ғᴏʀᴋ\x20ᴛʜᴇ\x20ʀᴇᴘᴏ\x20⬇️\x20\x0ahttps://github.com/Nimeshkamihiran/neno-xmd-V3\x0a\x0a>\x20©\x20ᴘᴏᴡᴇʀᴇᴅ\x20ʙʏ\x20ɴɪᴍᴇꜱʜᴋᴀ\x20ᴍɪʜɪʀᴀɴ💖😍','MODE','ANTI_DEL_PATH','AUTO_REPLY','BOT_NAME','READ_CMD','7866QyXtgj','version','ɴᴇɴᴏ-xᴍᴅ','*SEEN\x20YOUR\x20STATUS\x20BY\x20NENO.XMD\x20💖😍*','53927xWVIqF','config.env','OWNER_NUMBER','2632vhxySC','0.0.5','9946650lBedIi','AUTO_REACT','kick','exports','AUTO_STATUS_REPLY','READ_MESSAGE','AUTO_STATUS_REACT','inbox','844pjrWbl','263780166288','true','false'];_0x4be8=function(){return _0x184149;};return _0x4be8();}module[_0x1cb4d0(0x1cd)]={'SESSION_ID':process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x1e0)]||'','PREFIX':process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x1df)]||'.','BOT_NAME':process['env'][_0x1cb4d0(0x1fc)]||_0x1cb4d0(0x200),'MODE':process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x1f9)]||_0x1cb4d0(0x1dd),'LINK_WHITELIST':_0x1cb4d0(0x1db),'LINK_WARN_LIMIT':0x3,'LINK_ACTION':_0x1cb4d0(0x209),'AUTO_STATUS_SEEN':convertToBool(process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x1f1)]||_0x1cb4d0(0x1d4)),'AUTO_STATUS_REPLY':convertToBool(process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x1ce)]||_0x1cb4d0(0x1d5)),'AUTO_STATUS_REACT':convertToBool(process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x1d0)]||_0x1cb4d0(0x1d4)),'AUTO_STATUS_MSG':_0x1cb4d0(0x201),'WELCOME':convertToBool(process['env'][_0x1cb4d0(0x1d7)]||'true'),'ADMIN_EVENTS':convertToBool(process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x1f2)]||_0x1cb4d0(0x1d5)),'ANTI_LINK':convertToBool(process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x1f7)]||_0x1cb4d0(0x1d4)),'MENTION_REPLY':convertToBool(process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x1ef)]||_0x1cb4d0(0x1d5)),'MENU_IMAGE_URL':_0x1cb4d0(0x1e2),'ALIVE_IMG':_0x1cb4d0(0x1e9),'LIVE_MSG':'>\x20ʙᴏᴛ\x20ɪs\x20sᴘᴀʀᴋɪɴɢ\x20ᴀᴄᴛɪᴠᴇ\x20ᴀɴᴅ\x20ᴀʟɪᴠᴇ\x0a\x0aᴋᴇᴇᴘ\x20ᴜsɪɴɢ\x20✦ɴᴇɴᴏ\x20xᴍᴅ✦\x20ʙʏ\x20ɴɪᴍᴇꜱʜᴋᴀ⚡\x0a\x0a*©\x20ᴡʜᴀᴛꜱᴀᴘᴘ\x20ʙᴏᴛ\x20-ɴᴇɴᴏ\x20xᴍᴅ*\x0a\x0a>\x20ɢɪᴛʜᴜʙ\x20:\x20https://github.com/Nimeshkamihiran','STICKER_NAME':process['env'][_0x1cb4d0(0x1d6)]||_0x1cb4d0(0x1e3),'CUSTOM_REACT':convertToBool(process['env'][_0x1cb4d0(0x1d8)]||_0x1cb4d0(0x1d5)),'CUSTOM_REACT_EMOJIS':process['env']['CUSTOM_REACT_EMOJIS']||_0x1cb4d0(0x1f5),'DELETE_LINKS':convertToBool(process[_0x1cb4d0(0x1e1)]['DELETE_LINKS']||_0x1cb4d0(0x1d5)),'OWNER_NUMBER':process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x204)]||'94721584279','OWNER_NAME':process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x1dc)]||_0x1cb4d0(0x1eb),'DESCRIPTION':process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x1e5)]||_0x1cb4d0(0x1e7),'READ_MESSAGE':convertToBool(process['env'][_0x1cb4d0(0x1cf)]||_0x1cb4d0(0x1d5)),'AUTO_REACT':convertToBool(process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x208)]||_0x1cb4d0(0x1d5)),'ANTI_BAD':convertToBool(process['env']['ANTI_BAD']||_0x1cb4d0(0x1d5)),'ANTI_LINK_KICK':convertToBool(process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x1de)]||_0x1cb4d0(0x1d5)),'AUTO_STICKER':convertToBool(process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x1d9)]||_0x1cb4d0(0x1d5)),'AUTO_REPLY':convertToBool(process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x1fb)]||_0x1cb4d0(0x1d5)),'ALWAYS_ONLINE':convertToBool(process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x1ed)]||_0x1cb4d0(0x1d5)),'PUBLIC_MODE':convertToBool(process[_0x1cb4d0(0x1e1)]['PUBLIC_MODE']||_0x1cb4d0(0x1d5)),'AUTO_TYPING':convertToBool(process['env'][_0x1cb4d0(0x1f3)]||_0x1cb4d0(0x1d5)),'READ_CMD':convertToBool(process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x1fd)]||'false'),'DEV':process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x1da)]||_0x1cb4d0(0x1d3),'ANTI_VV':convertToBool(process['env']['ANTI_VV']||_0x1cb4d0(0x1d4)),'ANTI_DEL_PATH':process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x1fa)]||_0x1cb4d0(0x1d1),'AUTO_RECORDING':convertToBool(process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x1e8)]||'false'),'version':process[_0x1cb4d0(0x1e1)][_0x1cb4d0(0x1ff)]||_0x1cb4d0(0x206),'START_MSG':_0x1cb4d0(0x1f8)};
+const fs = require('fs');
+if (fs.existsSync('config.env')) require('dotenv').config({ path: './config.env' });
+
+function convertToBool(text, fault = 'true') {
+    return text === fault ? true : false;
+}
+
+module.exports = {
+    SESSION_ID: process.env.SESSION_ID || "NENO-XMD~XT4ySZxS#smA0PayYls4uJyQqhamEBT_npdKJz0AoCOnh6LaM7CY",
+    // add your Session Id make sure it starts with NENO~
+
+    PREFIX: process.env.PREFIX || ".",
+    // add your prefix for bot
+
+    BOT_NAME: process.env.BOT_NAME || "ɴᴇɴᴏ-xᴍᴅ",
+    // add bot name here for menu
+
+    MODE: process.env.MODE || "public",
+    // make bot public-private-inbox-group 
+
+    LINK_WHITELIST: "youtube.com,github.com",
+
+    LINK_WARN_LIMIT: 3, // Number of warnings before action
+
+    LINK_ACTION: "kick", // "kick", "mute", or "none"
+
+    AUTO_STATUS_SEEN: process.env.AUTO_STATUS_SEEN || "true",
+    // make true or false status auto seen
+
+    AUTO_STATUS_REPLY: process.env.AUTO_STATUS_REPLY || "false",
+    // make true if you want auto reply on status 
+
+    AUTO_STATUS_REACT: process.env.AUTO_STATUS_REACT || "true",
+    // make true if you want auto reply on status 
+
+    AUTO_STATUS_MSG: process.env.AUTO_STATUS_MSG || "*SEEN YOUR STATUS BY NENO.XMD 💖😍*",
+    // set the auto reply message on status reply  
+
+    WELCOME: process.env.WELCOME || "true",
+    // true if want welcome and goodbye msg in groups 
+
+    ADMIN_EVENTS: process.env.ADMIN_EVENTS || "false",
+    // make true to know who dismiss or promoted a member in group
+
+    ANTI_LINK: process.env.ANTI_LINK || "true",
+    // make anti link true,false for groups 
+
+    MENTION_REPLY: process.env.MENTION_REPLY || "false",
+    // make true if want auto voice reply if someone mention you 
+
+    MENU_IMAGE_URL: process.env.MENU_IMAGE_URL || "https://files.catbox.moe/4ldvn1.jpg",
+    // add custom menu and mention reply image url
+
+    ALIVE_IMG: process.env.ALIVE_IMG || "https://files.catbox.moe/ukjr05.jpg",
+    // add img for alive msg
+
+    LIVE_MSG: process.env.LIVE_MSG || 
+`> ʙᴏᴛ ɪs sᴘᴀʀᴋɪɴɢ ᴀᴄᴛɪᴠᴇ ᴀɴᴅ ᴀʟɪᴠᴇ
+
+ᴋᴇᴇᴘ ᴜsɪɴɢ ✦ɴᴇɴᴏ xᴍᴅ✦ ʙʏ ɴɪᴍᴇꜱʜᴋᴀ⚡
+
+*© ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ -ɴᴇɴᴏ xᴍᴅ*
+
+> ɢɪᴛʜᴜʙ : https://github.com/Nimeshkamihiran`,
+    // add alive msg here 
+
+    STICKER_NAME: process.env.STICKER_NAME || "ɴᴇɴᴏ ᴠ3",
+    // type sticker pack name 
+
+    CUSTOM_REACT: process.env.CUSTOM_REACT || "false",
+    // make this true for custom emoji react  
+
+    CUSTOM_REACT_EMOJIS: process.env.CUSTOM_REACT_EMOJIS || "💝,💖,💗,❤️‍🩹,❤️,💛,💚,💙,💜,🤎,🖤,🤍",
+    // choose custom react emojis by yourself 
+
+    DELETE_LINKS: process.env.DELETE_LINKS || "false",
+    // automatic delete links without removing member 
+
+    OWNER_NUMBER: process.env.OWNER_NUMBER || "94721584279",
+    // add your bot owner number
+
+    OWNER_NAME: process.env.OWNER_NAME || "ɴɪᴍᴇꜱʜᴋᴀ࿐",
+    // add bot owner name
+
+    DESCRIPTION: process.env.DESCRIPTION || "*© ᴘᴏᴡᴇʀᴇᴅ ʙʏ ɴɪᴍᴇꜱʜᴋᴀ ᴍɪʜɪʀᴀᴍ*",
+    // add bot owner description  
+
+    READ_MESSAGE: process.env.READ_MESSAGE || "false",
+    // Turn true or false for automatic read msgs
+
+    AUTO_REACT: process.env.AUTO_REACT || "false",
+    // make this true or false for auto react on all msgs
+
+    ANTI_BAD: process.env.ANTI_BAD || "false",
+    // false or true for anti bad words  
+
+    ANTI_LINK_KICK: process.env.ANTI_LINK_KICK || "false",
+    // make anti link true,false for groups 
+
+    AUTO_STICKER: process.env.AUTO_STICKER || "false",
+    // make true for automatic stickers 
+
+    AUTO_REPLY: process.env.AUTO_REPLY || "false",
+    // make true or false automatic text reply 
+
+    ALWAYS_ONLINE: process.env.ALWAYS_ONLINE || "false",
+    // make true for always online 
+
+    PUBLIC_MODE: process.env.PUBLIC_MODE || "false",
+    // make false if want private mode
+
+    AUTO_TYPING: process.env.AUTO_TYPING || "false",
+    // true for automatic show typing  
+
+    READ_CMD: process.env.READ_CMD || "false",
+    // true if want mark commands as read  
+
+    DEV: process.env.DEV || "263780166288",
+    // replace with your whatsapp number  
+
+    ANTI_VV: process.env.ANTI_VV || "true",
+    // true for anti once view 
+
+    ANTI_DEL_PATH: process.env.ANTI_DEL_PATH || "inbox",
+    // change it to 'inbox' or 'same' if you want to resend deleted message in same chat 
+
+    AUTO_RECORDING: process.env.AUTO_RECORDING || "false",
+    // make it true for auto recording 
+
+    version: process.env.version || "0.0.5",
+
+    START_MSG: process.env.START_MSG || 
+`*Hᴇʟʟᴏ ᴀʟʟ ɪᴀᴍ ɴᴇɴᴏ xᴍᴅ ᴡʜᴀᴛꜱᴘᴘ ʙᴏᴛ ᴄᴏɴɴᴇᴄᴛᴇᴅ! 👋🏻* 
+
+*💖ᴋᴇᴇᴘ ᴏɴ ɴɪᴄᴇ ᴛᴏ ᴍᴇᴇᴛ ʏᴏᴜ💫☺️* 
+
+> sᴜʙsᴄʀɪʙᴇ ʏᴛ ᴄʜᴀɴɴᴇʟ ғᴏʀ ᴛᴜᴛᴏʀɪᴀʟs
+https://youtube.com/@MihirangaMihiranga-k1k
+
+- *ʏᴏᴜʀ ʙᴏᴛ ᴘʀᴇғɪx: ➡️[ . ]*
+> - ʏᴏᴜ ᴄᴀɴ ᴄʜᴀɴɢᴇ ᴜʀ ᴘʀᴇғɪx ᴜsɪɴɢ ᴛʜᴇ .ᴘʀᴇғɪx ᴄᴏᴍᴍᴀɴᴅ
+
+> ᴅᴏɴᴛ ғᴏʀɢᴇᴛ ᴛᴏ sʜᴀʀᴇ, sᴛᴀʀ & ғᴏʀᴋ ᴛʜᴇ ʀᴇᴘᴏ ⬇️ 
+https://github.com/Nimeshkamihiran/neno-xmd-V3
+
+> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ɴɪᴍᴇꜱʜᴋᴀ ᴍɪʜɪʀᴀɴ💖😍`,
+OWNER_DISPLAY: process.env.OWNER_DISPLAY || "Nimeshka Mihiran",
+    
+DOWNLOAD_DIR: process.env.DOWNLOAD_DIR || "./downloaded_status",
+
+  // Timezone
+TIMEZONE: process.env.TIMEZONE || "Asia/Colombo"
+};
