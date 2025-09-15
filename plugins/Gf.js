@@ -41,7 +41,7 @@ lite({
   pattern: "gf",
   react: "💞",
   desc: "Chat with Saduni (your gf bot) using Gemini AI",
-  category: "fun",
+  category: "ai",
   filename: __filename
 }, 
 async (conn, mek, m, { q, reply }) => {
