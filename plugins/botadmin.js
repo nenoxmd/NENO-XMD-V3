@@ -29,7 +29,7 @@ lite({
 
         // stylized message with image + newsletter style
         await conn.sendMessage(from, {
-            image: { url: 'https://ik.imagekit.io/apexcloud/Designer%20(18).jpeg' },
+            image: { url: 'https://files.catbox.moe/fk0uuz.jpg' },
             caption: `
 ╭━━ *ɴᴇɴᴏ xᴍᴅ ᴠ3* ━━━
 ┃  *Name* : ${ownerName}
@@ -37,7 +37,7 @@ lite({
 ┃  *Bot* : ɴᴇɴᴏ xᴍᴅ
 ┃  *Version* : ᴠ3
 ╰━━━━━━━━━━━━━━━━━━━━━━━╯
-*⚡️ Keep rockin' Andromeda*
+*⚡️ ɴᴇɴᴏ xᴍᴅ ᴠ3 ɴᴇᴡ*
             `.trim(),
             contextInfo: {
                 mentionedJid: [`${ownerNumber}@s.whatsapp.net`],
