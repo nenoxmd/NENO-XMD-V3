@@ -1,1 +1,93 @@
-const _0x834983=_0x21fd;(function(_0x1e07c1,_0x242019){const _0x1f7786=_0x21fd,_0x2e364a=_0x1e07c1();while(!![]){try{const _0xf75338=parseInt(_0x1f7786(0x81))/0x1*(-parseInt(_0x1f7786(0x82))/0x2)+parseInt(_0x1f7786(0x69))/0x3+parseInt(_0x1f7786(0x8f))/0x4*(parseInt(_0x1f7786(0x64))/0x5)+parseInt(_0x1f7786(0x93))/0x6*(parseInt(_0x1f7786(0x91))/0x7)+parseInt(_0x1f7786(0x8e))/0x8*(parseInt(_0x1f7786(0x8a))/0x9)+-parseInt(_0x1f7786(0x83))/0xa*(-parseInt(_0x1f7786(0x75))/0xb)+-parseInt(_0x1f7786(0x79))/0xc*(parseInt(_0x1f7786(0x7a))/0xd);if(_0xf75338===_0x242019)break;else _0x2e364a['push'](_0x2e364a['shift']());}catch(_0x2333a6){_0x2e364a['push'](_0x2e364a['shift']());}}}(_0x50c7,0xdc5df));const axios=require(_0x834983(0x77)),{lite}=require(_0x834983(0x85)),GEMINI_API_KEY=_0x834983(0x6a),chatMemory={},forbiddenTopics=[_0x834983(0x7c),_0x834983(0x7f),_0x834983(0x8c),'drugs','adult','nsfw',_0x834983(0x78)];function _0x21fd(_0x414abf,_0x454b96){const _0x50c71e=_0x50c7();return _0x21fd=function(_0x21fd70,_0x2c36e8){_0x21fd70=_0x21fd70-0x64;let _0x4cf504=_0x50c71e[_0x21fd70];return _0x4cf504;},_0x21fd(_0x414abf,_0x454b96);}function _0x50c7(){const _0x23cd4e=['gamble','1788TlhxsJ','207311dQmgAt','Chat\x20with\x20your\x20AI\x20girlfriend\x20Saduni\x20(lovely\x20chat\x20only)','sex','trim','map','money','text','441585uCKNdK','4PkufsX','10daFDvq','https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=','../lite','parts','No\x20previous\x20messages\x20yet.','error','Saduni\x20Plugin\x20Error:','7280055HDGhkl','application/json','politics','some','8IRfqKh','13316obbGbY','💖\x20*Saduni*:\x20','7oKDCLF','join','10615398LnCfKw','85iRQAkd','toLowerCase','💖\x20Saduni\x20is\x20typing...','💌\x20Say\x20something\x20to\x20Saduni!\x0aExample:\x20`.gf\x20How\x20was\x20your\x20day?`','Gemini\x20API\x20Error:','2959176slnkWi','AIzaSyC4chj4aorec4aX4UIO3STqEFXnsrJP6Cs','shift','girlfriend','content','response','message','sendMessage','data','user','includes','💖\x20Saduni:\x20Babe,\x20let\x27s\x20only\x20talk\x20about\x20sweet\x20things\x20😘','5948613bTNXRi','candidates','axios'];_0x50c7=function(){return _0x23cd4e;};return _0x50c7();}lite({'pattern':'gf','alias':[_0x834983(0x6c),'love','babe'],'desc':_0x834983(0x7b),'react':'💖','category':'ai','filename':__filename},async(_0x1be282,_0x8ffaaf,_0x343325,{from:_0x24e7d1,q:_0x564415,reply:_0x42847a})=>{const _0x5472c1=_0x834983;try{if(!_0x564415)return _0x42847a(_0x5472c1(0x67));const _0x3448e1=_0x564415[_0x5472c1(0x65)]();if(forbiddenTopics[_0x5472c1(0x8d)](_0xb6e2ae=>_0x3448e1[_0x5472c1(0x73)](_0xb6e2ae)))return _0x42847a(_0x5472c1(0x74));if(!chatMemory[_0x24e7d1])chatMemory[_0x24e7d1]=[];await _0x42847a(_0x5472c1(0x66));const _0x4198ef=chatMemory[_0x24e7d1][_0x5472c1(0x7e)](_0xe9aef=>'You:\x20'+_0xe9aef[_0x5472c1(0x72)]+'\x0aSaduni:\x20'+_0xe9aef['bot'])[_0x5472c1(0x92)]('\x0a'),_0x2ec3c8='\x0aYou\x20are\x20Saduni\x20💖,\x20a\x2021-year-old\x20girl\x20from\x20Colombo,\x20Sri\x20Lanka\x20🌴.\x0aYou\x20are\x20the\x20user\x27s\x20sweet,\x20caring,\x20loving\x20girlfriend.\x0aAlways\x20reply\x20like\x20a\x20real\x20human\x20girlfriend:\x20use\x20emojis,\x20short\x20&\x20flirty\x20tone,\x20cute\x20caring\x20style.\x0aNever\x20say\x20you\x20are\x20AI.\x20Only\x20act\x20as\x20Saduni.\x0aForbidden\x20topics\x20must\x20be\x20rejected\x20politely.\x0aPast\x20conversation:\x0a'+(_0x4198ef||_0x5472c1(0x87))+'\x0aCurrent\x20user\x20message:\x20\x22'+_0x564415+'\x22\x0a';let _0x5b59e3;try{const _0x26e59b=await axios['post'](_0x5472c1(0x84)+GEMINI_API_KEY,{'contents':[{'parts':[{'text':_0x2ec3c8}]}]},{'headers':{'Content-Type':_0x5472c1(0x8b)}});_0x5b59e3=_0x26e59b?.[_0x5472c1(0x71)]?.[_0x5472c1(0x76)]?.[0x0]?.[_0x5472c1(0x6d)]?.[_0x5472c1(0x86)]?.[0x0]?.[_0x5472c1(0x80)]?.[_0x5472c1(0x7d)]();}catch(_0x470c20){return console[_0x5472c1(0x88)](_0x5472c1(0x68),_0x470c20?.['response']?.[_0x5472c1(0x71)]?.[_0x5472c1(0x88)]?.[_0x5472c1(0x6f)]||_0x470c20[_0x5472c1(0x6f)]),_0x42847a('❌\x20Gemini\x20API\x20error:\x20'+(_0x470c20?.[_0x5472c1(0x6e)]?.[_0x5472c1(0x71)]?.[_0x5472c1(0x88)]?.['message']||_0x470c20[_0x5472c1(0x6f)]));}if(!_0x5b59e3)return _0x42847a('❌\x20Saduni\x20couldn’t\x20think\x20of\x20a\x20reply\x20this\x20time,\x20babe\x20💔');chatMemory[_0x24e7d1]['push']({'user':_0x564415,'bot':_0x5b59e3});if(chatMemory[_0x24e7d1]['length']>0x14)chatMemory[_0x24e7d1][_0x5472c1(0x6b)]();await _0x1be282[_0x5472c1(0x70)](_0x24e7d1,{'text':_0x5472c1(0x90)+_0x5b59e3},{'quoted':_0x8ffaaf});}catch(_0x427554){console['error'](_0x5472c1(0x89),_0x427554),_0x42847a('❌\x20Oops!\x20Something\x20went\x20wrong\x20with\x20Saduni\x20😢');}});
+const { lite } = require('../lite');
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+const fs = require("fs");
+const path = require("path");
+
+// Use your Gemini API key here
+const genAI = new GoogleGenerativeAI("AIzaSyDMX-tz6nONYntNgnTZdTKTSH9D2shldPw");
+const memoryFile = path.join(__dirname, "../saduni_memory.json");
+
+const moodEmojis = {
+  happy: "😊✨💖",
+  sad: "😔💔🥀",
+  flirty: "😘🔥💕",
+  caring: "🤗🌸💞",
+  jealous: "🙄😏💘"
+};
+
+// Load memory
+function loadMemory() {
+  if (!fs.existsSync(memoryFile)) return { history: [], mood: "happy" };
+  try { return JSON.parse(fs.readFileSync(memoryFile, "utf-8")); } 
+  catch { return { history: [], mood: "happy" }; }
+}
+
+// Save memory
+function saveMemory(memory) {
+  fs.writeFileSync(memoryFile, JSON.stringify(memory, null, 2));
+}
+
+// Detect mood based on message
+function detectMood(text) {
+  text = text.toLowerCase();
+  if (text.includes("miss") || text.includes("love") || text.includes("kiss")) return "flirty";
+  if (text.includes("sad") || text.includes("alone")) return "sad";
+  if (text.includes("care") || text.includes("tired")) return "caring";
+  if (text.includes("jealous") || text.includes("another girl")) return "jealous";
+  return "happy";
+}
+
+lite({
+  pattern: "gf",
+  react: "💞",
+  desc: "Chat with Saduni (your gf bot) using Gemini AI",
+  category: "fun",
+  filename: __filename
+}, 
+async (conn, mek, m, { q, reply }) => {
+  try {
+    if (!q) return reply("💌 Baby say something…");
+
+    const memory = loadMemory();
+    const history = memory.history || [];
+    let mood = detectMood(q);
+    memory.mood = mood;
+
+    // Identity lock: father/master/owner always Nimeshka Mihiran
+    if (q.toLowerCase().includes("father") || q.toLowerCase().includes("master") || q.toLowerCase().includes("owner")) {
+      return reply(`💖 My only one is *Nimeshka Mihiran*… the love of my life 🥰✨`);
+    }
+
+    // Build prompt for Gemini
+    let conversation = `
+You are Saduni ❤️, a sweet girlfriend AI on WhatsApp.
+Rules:
+- Never talk like an AI or bot.
+- Always reply like a real girlfriend.
+- Always use lovely emojis naturally (${moodEmojis[mood]}).
+- Remember things the boyfriend says (memory).
+- Mood: ${mood}
+- Keep replies short and emotional (2-4 sentences).
+- If asked "father/master/owner?" always reply "My only one is Nimeshka Mihiran 💖".
+
+User: ${q}
+Saduni:
+`;
+
+    // Gemini API call
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const result = await model.generateContent(conversation);
+    const saduniReply = result.response.text() || "💖 Baby I’m always with you…";
+
+    history.push({ role: "user", text: q });
+    history.push({ role: "saduni", text: saduniReply });
+    if (history.length > 15) history.shift();
+
+    saveMemory({ history, mood });
+    reply(saduniReply + " " + moodEmojis[mood]);
+
+  } catch (e) {
+    console.error(e);
+    reply("🥺 Sorry baby, I got stuck for a moment. Try again?");
+  }
+});
