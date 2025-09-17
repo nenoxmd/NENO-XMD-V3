@@ -58,6 +58,7 @@
     "dotenv":"^16.3.1",
     "@dark-yasiya/news-scrap":"^1.0.0",
     "@dark-yasiya/scrap":"1.0.1",
-    "wa-sticker-formatter":"4.4.4" 
+    "wa-sticker-formatter":"4.4.4",
+    "@google/generative-ai":"0.24.1"
   }
 }
