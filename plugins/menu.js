@@ -1,8 +1,8 @@
 const fs = require('fs');
 const config = require('../settings');
-const { lite, commands } = require('../lite');  // use lite.js instead of neno.js
+const { lite, commands } = require('../lite');
 
-// Numbered Menu Categories
+// Menu Categories
 const NUM_CATEGORIES = [
   { num: '1', key: 'group', title: 'Admin Commands' },
   { num: '2', key: 'download', title: 'Downloader Commands' },
@@ -16,9 +16,9 @@ const NUM_CATEGORIES = [
   { num: '0', key: 'all', title: 'Full Menu (All Commands)' }
 ];
 
-const MENU_MARKER = '#MENU_ID:lite_menu_v1';
+const MENU_MARKER = '#MENU_ID:lite_menu_v3';
 
-// Build command list for category
+// Build category command list
 function buildCategoryList(catKey) {
   if (catKey === 'all') {
     const grouped = {};
@@ -48,7 +48,7 @@ function buildCategoryList(catKey) {
   return out;
 }
 
-// Menu command (main)
+// Main menu command
 lite({
   pattern: "menu",
   react: "💫",
@@ -66,48 +66,45 @@ async (conn, mek, m, { from, pushname, reply }) => {
     numberedMenu += `│ 📦 Total Commands: ${commands.length}\n`;
     numberedMenu += `│ 📌 Version: ${config.version} v3\n`;
     numberedMenu += `╰─────────────✦\n\n`;
-    numberedMenu += `Reply (quote this message) with the number to view commands:\n\n`;
+    numberedMenu += `🔽 *Reply with your choice:*\n`;
 
     NUM_CATEGORIES.forEach(item => {
-      numberedMenu += `│ ${item.num}. ${item.title}\n`;
+      numberedMenu += `> ${item.num}. ${item.title}\n`;
     });
 
-    numberedMenu += `\nExample: Reply with "1" to see Admin Commands.\n\n${config.DESCRIPTION}\n\n${MENU_MARKER}`;
+    numberedMenu += `\nExample: Reply "1" to see Admin Commands.\n\n${MENU_MARKER}`;
 
     await conn.sendMessage(from, {
       image: { url: config.MENU_IMAGE_URL },
       caption: numberedMenu
     }, { quoted: mek });
 
-    // Optional: play menu audio
+    // optional audio
     if (fs.existsSync('./all/menu.m4a')) {
-      try {
-        await conn.sendMessage(from, {
-          audio: fs.readFileSync('./all/menu.m4a'),
-          mimetype: 'audio/mp4',
-          ptt: true
-        }, { quoted: mek });
-      } catch (err) {
-        console.warn('menu audio send fail', err);
-      }
+      await conn.sendMessage(from, {
+        audio: fs.readFileSync('./all/menu.m4a'),
+        mimetype: 'audio/mp4',
+        ptt: true
+      }, { quoted: mek });
     }
+
   } catch (e) {
     console.error(e);
     reply(`${e}`);
   }
 });
 
-// Handle numeric reply
+// Number reply handler (same logic as song plugin)
 lite({
   pattern: '^[0-9]{1,2}$',
   react: "🔢",
-  desc: "Handle numeric replies for the lite menu",
+  desc: "Handle menu category replies",
   dontAddCommandList: true,
   filename: __filename
 },
 async (conn, mek, m, { from, quoted, reply }) => {
   try {
-    if (!quoted) return; // must reply to menu
+    if (!quoted) return;
 
     let qText = '';
     try {
@@ -122,13 +119,14 @@ async (conn, mek, m, { from, quoted, reply }) => {
 
     const choice = (m.text || '').trim();
     const selected = NUM_CATEGORIES.find(x => x.num === choice);
-    if (!selected) return reply('Invalid number. Reply with a valid menu number.');
+    if (!selected) return await reply("❌ Invalid choice! Reply with a valid number.");
 
     const header = `╭─❍ *${selected.title}*\n\n`;
     const body = buildCategoryList(selected.key);
-    const footer = `\n\nReply to the original menu and type another number to view a different category.`;
+    const footer = `\n\nReply to the original menu and type another number to switch category.\n\n${MENU_MARKER}`;
 
     await conn.sendMessage(from, { text: header + body + footer }, { quoted: mek });
+
   } catch (e) {
     console.error(e);
     reply(`${e}`);
