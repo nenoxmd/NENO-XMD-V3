@@ -1,1 +1,136 @@
-function _0x347c(){const _0x3c2a7d=['40234880veLdFX','\x0a└─────────────✦\x0a\x0a┌───『\x20📥\x20Downloader\x20Commands\x20』\x0a','group','main','10569CDUbOD','\x0a└─────────────✦\x0a\x0a┌───『\x20🧑‍💻\x20Owner\x20Commands\x20』\x0a','../lite','│\x20(No\x20commands\x20found)','allmenu','owner','NENO\x20XMD','other','fun','120363401225837204@newsletter','convert','category','2635216hqizoA','sendMessage','\x0a└─────────────✦\x0a\x0a┌───『\x20🧠\x20AI\x20Commands\x20』\x0a','sender','Get\x20command\x20list','MODE','MENU_IMAGE_URL','download','menu','5uwZtbh','\x0a└─────────────✦\x0a\x0a┌───『\x20🔄\x20Convert\x20Commands\x20』\x0a','length','version','reaction','error','│\x20⬡\x20','\x0a└─────────────✦\x0a\x0a┌───『\x20🎭\x20Reaction\x20Commands\x20』\x0a','10450656YZfJvd','audio/mp4',']\x0a│\x20✨\x20Prefix:\x20[','dontAddCommandList','111362AYHWaD','4129735MEDGSy','1284YhxKoI','DESCRIPTION','\x0a│\x20📌\x20Version:\x20','3495306aqtKih','14OrXaht',']\x0a│\x20📦\x20Total\x20Commands:\x20','./all/menu.m4a'];_0x347c=function(){return _0x3c2a7d;};return _0x347c();}const _0x331f2d=_0x1b58;(function(_0x5b633e,_0x5c3299){const _0x1cea65=_0x1b58,_0x158a8e=_0x5b633e();while(!![]){try{const _0x49b355=-parseInt(_0x1cea65(0x204))/0x1*(-parseInt(_0x1cea65(0x1e2))/0x2)+-parseInt(_0x1cea65(0x1ef))/0x3*(-parseInt(_0x1cea65(0x1e4))/0x4)+parseInt(_0x1cea65(0x1e3))/0x5+parseInt(_0x1cea65(0x1e7))/0x6*(parseInt(_0x1cea65(0x1e8))/0x7)+parseInt(_0x1cea65(0x1fb))/0x8+parseInt(_0x1cea65(0x20c))/0x9+-parseInt(_0x1cea65(0x1eb))/0xa;if(_0x49b355===_0x5c3299)break;else _0x158a8e['push'](_0x158a8e['shift']());}catch(_0xbf065e){_0x158a8e['push'](_0x158a8e['shift']());}}}(_0x347c,0xd3c6b));const fs=require('fs'),config=require('../settings'),{lite,commands}=require(_0x331f2d(0x1f1)),axios=require('axios');function _0x1b58(_0x543cb4,_0x5435ac){const _0x347c8b=_0x347c();return _0x1b58=function(_0x1b58f0,_0x3e2fd9){_0x1b58f0=_0x1b58f0-0x1e1;let _0x31dcfd=_0x347c8b[_0x1b58f0];return _0x31dcfd;},_0x1b58(_0x543cb4,_0x5435ac);}lite({'pattern':_0x331f2d(0x203),'react':'💫','alias':[_0x331f2d(0x1f3)],'desc':_0x331f2d(0x1ff),'category':'main','filename':__filename},async(_0x4dbfee,_0xde00d4,_0x41a12f,{from:_0xa47083,quoted:_0x5aea79,pushname:_0x42b27f,reply:_0x633b6e})=>{const _0x335b9b=_0x331f2d;try{let _0x29c8d2={'download':'','group':'','fun':'','owner':'','ai':'','anime':'','convert':'','reaction':'','main':'','other':''};for(let _0x3480a8=0x0;_0x3480a8<commands['length'];_0x3480a8++){let _0x3ad6a8=commands[_0x3480a8];_0x3ad6a8['pattern']&&!_0x3ad6a8[_0x335b9b(0x1e1)]&&_0x29c8d2['hasOwnProperty'](_0x3ad6a8[_0x335b9b(0x1fa)])&&(_0x29c8d2[_0x3ad6a8[_0x335b9b(0x1fa)]]+=_0x335b9b(0x20a)+_0x3ad6a8['pattern']+'\x0a');}let _0x28b44d='\x0a╭─❍\x20*'+config['BOT_NAME']+'\x20MENU*\x0a│\x20👤\x20User:\x20'+_0x42b27f+'\x0a│\x20🌐\x20Mode:\x20['+config[_0x335b9b(0x200)]+_0x335b9b(0x20e)+config['PREFIX']+_0x335b9b(0x1e9)+commands[_0x335b9b(0x206)]+_0x335b9b(0x1e6)+config[_0x335b9b(0x207)]+'\x20BETA\x0a╰─────────────✦\x0a\x0a┌───『\x20🛠️\x20Admin\x20Commands\x20』\x0a'+(_0x29c8d2[_0x335b9b(0x1ed)]||_0x335b9b(0x1f2))+'\x0a'+(_0x29c8d2[_0x335b9b(0x1ee)]||'')+'\x0a'+(_0x29c8d2[_0x335b9b(0x1f6)]||'')+_0x335b9b(0x1ec)+(_0x29c8d2[_0x335b9b(0x202)]||_0x335b9b(0x1f2))+_0x335b9b(0x1f0)+(_0x29c8d2[_0x335b9b(0x1f4)]||_0x335b9b(0x1f2))+_0x335b9b(0x1fd)+(_0x29c8d2['ai']||_0x335b9b(0x1f2))+'\x0a└─────────────✦\x0a\x0a┌───『\x20✨\x20Logo/Anime\x20Commands\x20』\x0a'+(_0x29c8d2['anime']||_0x335b9b(0x1f2))+_0x335b9b(0x205)+(_0x29c8d2[_0x335b9b(0x1f9)]||_0x335b9b(0x1f2))+_0x335b9b(0x20b)+(_0x29c8d2[_0x335b9b(0x208)]||_0x335b9b(0x1f2))+'\x0a└─────────────✦\x0a\x0a┌───『\x20🎉\x20Fun\x20Commands\x20』\x0a'+(_0x29c8d2[_0x335b9b(0x1f7)]||_0x335b9b(0x1f2))+'\x0a└─────────────✦\x0a\x0a>\x20'+config[_0x335b9b(0x1e5)]+'\x0a';await _0x4dbfee[_0x335b9b(0x1fc)](_0xa47083,{'image':{'url':config[_0x335b9b(0x201)]},'caption':_0x28b44d,'contextInfo':{'mentionedJid':[_0x41a12f[_0x335b9b(0x1fe)]],'forwardingScore':0x3e7,'isForwarded':!![],'forwardedNewsletterMessageInfo':{'newsletterJid':_0x335b9b(0x1f8),'newsletterName':_0x335b9b(0x1f5),'serverMessageId':0x8f}}},{'quoted':_0xde00d4}),await _0x4dbfee[_0x335b9b(0x1fc)](_0xa47083,{'audio':fs['readFileSync'](_0x335b9b(0x1ea)),'mimetype':_0x335b9b(0x20d),'ptt':!![]},{'quoted':_0xde00d4});}catch(_0x2b3342){console[_0x335b9b(0x209)](_0x2b3342),_0x633b6e(''+_0x2b3342);}});
+const fs = require('fs');
+const config = require('../settings');
+const { lite, commands } = require('../lite');  // use lite.js instead of neno.js
+
+// Numbered Menu Categories
+const NUM_CATEGORIES = [
+  { num: '1', key: 'group', title: 'Admin Commands' },
+  { num: '2', key: 'download', title: 'Downloader Commands' },
+  { num: '3', key: 'owner', title: 'Owner Commands' },
+  { num: '4', key: 'ai', title: 'AI Commands' },
+  { num: '5', key: 'anime', title: 'Logo / Anime Commands' },
+  { num: '6', key: 'convert', title: 'Convert Commands' },
+  { num: '7', key: 'reaction', title: 'Reaction Commands' },
+  { num: '8', key: 'fun', title: 'Fun Commands' },
+  { num: '9', key: 'other', title: 'Other / Main Commands' },
+  { num: '0', key: 'all', title: 'Full Menu (All Commands)' }
+];
+
+const MENU_MARKER = '#MENU_ID:lite_menu_v1';
+
+// Build command list for category
+function buildCategoryList(catKey) {
+  if (catKey === 'all') {
+    const grouped = {};
+    for (const cmd of commands) {
+      if (!cmd.pattern || cmd.dontAddCommandList) continue;
+      const ckey = cmd.category || 'other';
+      if (!grouped[ckey]) grouped[ckey] = [];
+      grouped[ckey].push(cmd);
+    }
+    let out = '';
+    for (const g in grouped) {
+      out += `\n┌─── 『 ${g.toUpperCase()} 』\n`;
+      grouped[g].forEach((c, i) => {
+        out += `│ ${i + 1}. ${c.pattern}${c.desc ? ' — ' + c.desc : ''}\n`;
+      });
+      out += `└────────\n`;
+    }
+    return out || 'No commands found.';
+  }
+
+  const list = commands.filter(c => c.pattern && !c.dontAddCommandList && c.category === catKey);
+  if (!list.length) return 'No commands found in this category.';
+  let out = '';
+  list.forEach((c, i) => {
+    out += `│ ${i + 1}. ${c.pattern}${c.desc ? ' — ' + c.desc : ''}\n`;
+  });
+  return out;
+}
+
+// Menu command (main)
+lite({
+  pattern: "menu",
+  react: "💫",
+  alias: ["allmenu"],
+  desc: "Lite numbered menu: reply with a number to view category",
+  category: "main",
+  filename: __filename
+},
+async (conn, mek, m, { from, pushname, reply }) => {
+  try {
+    let numberedMenu = `╭─❍ *${config.BOT_NAME} MENU*\n`;
+    numberedMenu += `│ 👤 User: ${pushname}\n`;
+    numberedMenu += `│ 🌐 Mode: [${config.MODE}]\n`;
+    numberedMenu += `│ ✨ Prefix: [${config.PREFIX}]\n`;
+    numberedMenu += `│ 📦 Total Commands: ${commands.length}\n`;
+    numberedMenu += `│ 📌 Version: ${config.version} v3\n`;
+    numberedMenu += `╰─────────────✦\n\n`;
+    numberedMenu += `Reply (quote this message) with the number to view commands:\n\n`;
+
+    NUM_CATEGORIES.forEach(item => {
+      numberedMenu += `│ ${item.num}. ${item.title}\n`;
+    });
+
+    numberedMenu += `\nExample: Reply with "1" to see Admin Commands.\n\n${config.DESCRIPTION}\n\n${MENU_MARKER}`;
+
+    await conn.sendMessage(from, {
+      image: { url: config.MENU_IMAGE_URL },
+      caption: numberedMenu
+    }, { quoted: mek });
+
+    // Optional: play menu audio
+    if (fs.existsSync('./all/menu.m4a')) {
+      try {
+        await conn.sendMessage(from, {
+          audio: fs.readFileSync('./all/menu.m4a'),
+          mimetype: 'audio/mp4',
+          ptt: true
+        }, { quoted: mek });
+      } catch (err) {
+        console.warn('menu audio send fail', err);
+      }
+    }
+  } catch (e) {
+    console.error(e);
+    reply(`${e}`);
+  }
+});
+
+// Handle numeric reply
+lite({
+  pattern: '^[0-9]{1,2}$',
+  react: "🔢",
+  desc: "Handle numeric replies for the lite menu",
+  dontAddCommandList: true,
+  filename: __filename
+},
+async (conn, mek, m, { from, quoted, reply }) => {
+  try {
+    if (!quoted) return; // must reply to menu
+
+    let qText = '';
+    try {
+      if (quoted.message?.imageMessage?.caption) qText = quoted.message.imageMessage.caption;
+      else if (quoted.message?.extendedTextMessage?.text) qText = quoted.message.extendedTextMessage.text;
+      else if (quoted.message?.conversation) qText = quoted.message.conversation;
+    } catch (err) {
+      qText = '';
+    }
+
+    if (!qText || !qText.includes(MENU_MARKER)) return; // not our menu
+
+    const choice = (m.text || '').trim();
+    const selected = NUM_CATEGORIES.find(x => x.num === choice);
+    if (!selected) return reply('Invalid number. Reply with a valid menu number.');
+
+    const header = `╭─❍ *${selected.title}*\n\n`;
+    const body = buildCategoryList(selected.key);
+    const footer = `\n\nReply to the original menu and type another number to view a different category.`;
+
+    await conn.sendMessage(from, { text: header + body + footer }, { quoted: mek });
+  } catch (e) {
+    console.error(e);
+    reply(`${e}`);
+  }
+});
