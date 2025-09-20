@@ -6,7 +6,7 @@ function convertToBool(text, fault = 'true') {
 }
 
 module.exports = {
-    SESSION_ID: process.env.SESSION_ID || "NENO-XMD~rSx0CJhL#Po-lc0ndFDKd4hVu-BOaMMtFsqVGqcIjoWYXGnYyQrE",
+    SESSION_ID: process.env.SESSION_ID || "NENO-XMD~KWBVGJhR#wodKjrDmmHKQwVcpsE9Ylpef2fhrdoiBpMBVvS9vbJo",
     // add your Session Id make sure it starts with NENO~
 
     PREFIX: process.env.PREFIX || ".",
@@ -15,7 +15,7 @@ module.exports = {
     BOT_NAME: process.env.BOT_NAME || "ɴᴇɴᴏ-xᴍᴅ",
     // add bot name here for menu
 
-    MODE: process.env.MODE || "public",
+    MODE: process.env.MODE || "private",
     // make bot public-private-inbox-group 
 
     LINK_WHITELIST: "youtube.com,github.com",
