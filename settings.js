@@ -33,6 +33,8 @@ module.exports = {
     AUTO_STATUS_REACT: process.env.AUTO_STATUS_REACT || "true",
     // make true if you want auto reply on status 
 
+    AUTO_VOICE: process.env.AUTO_VOICE || "true",
+
     AUTO_STATUS_MSG: process.env.AUTO_STATUS_MSG || "*SEEN YOUR STATUS BY NENO.XMD 💖😍*",
     // set the auto reply message on status reply  
 
